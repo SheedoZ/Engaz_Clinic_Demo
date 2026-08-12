@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#02143f">
+  <title>ENGAZ Clinic V2 — ديمو العيادات الذكي</title>
+  <link rel="stylesheet" href="v2-theme.css">
+</head>
+<body>
+  <a class="skip-link" href="#mainContent">تخطَّ إلى محتوى الديمو</a>
+
+  <header class="demo-header">
+    <div class="header-inner">
+      <a class="brand" href="https://engaz.premiumpower-eg.com/" aria-label="العودة إلى موقع إنجاز">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-copy"><strong>ENGAZ</strong><small>BUSINESS OPERATING SYSTEM</small></span>
+      </a>
+      <nav class="demo-switch" aria-label="التنقل بين ديموهات V2">
+        <a href="https://clinic.engaz.premiumpower-eg.com/" aria-current="page">العيادة</a>
+        <a href="https://lab.engaz.premiumpower-eg.com/">المعمل</a>
+        <a href="https://automation.engaz.premiumpower-eg.com/">الأتمتة</a>
+      </nav>
+      <div class="header-badges" aria-label="حالة الديمو">
+        <span class="v2-badge">Clinic V2</span>
+        <span class="simulation-badge">محاكاة آمنة</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="أقسام نظام العيادة">
+      <div class="tenant">
+        <span class="tenant-label">مساحة العمل الحالية</span>
+        <strong data-tenant-name>عيادة تجريبية ENGAZ</strong>
+        <span class="live-line"><span class="live-dot" aria-hidden="true"></span> النظام يعمل الآن</span>
+      </div>
+      <nav class="side-nav">
+        <button type="button" aria-current="page" data-scroll="clinic-overview"><span class="nav-icon" aria-hidden="true">01</span> نظرة اليوم</button>
+        <button type="button" data-scroll="clinic-appointments"><span class="nav-icon" aria-hidden="true">02</span> المواعيد</button>
+        <button type="button" data-scroll="clinic-smart"><span class="nav-icon" aria-hidden="true">03</span> المساعد الذكي</button>
+        <button type="button" data-scroll="clinic-reports"><span class="nav-icon" aria-hidden="true">04</span> التقارير</button>
+      </nav>
+      <div class="side-note">
+        <strong>بيانات تجريبية فقط</strong>
+        كل الرسائل والتوصيات في النسخة دي محاكاة محلية. لا يتم إرسال واتساب أو حفظ بيانات مرضى حقيقية.
+      </div>
+    </aside>
+
+    <main class="content" id="mainContent" tabindex="-1">
+      <div class="content-inner">
+        <div class="page-head">
+          <div>
+            <span class="page-kicker">CLINIC OPERATIONS / V2</span>
+            <h1 class="page-title">اليوم تحت السيطرة</h1>
+            <p class="page-summary">حجوزات، قائمة انتظار، متابعة، وتوقع مبكر لاحتمال الغياب — في شاشة تشغيل واحدة.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn" type="button" id="dailyBriefBtn">ملخص اليوم الذكي</button>
+            <button class="btn btn-primary" type="button" id="newBookingBtn">+ حجز موعد</button>
+          </div>
+        </div>
+
+        <section id="clinic-overview" aria-labelledby="clinicHeroTitle">
+          <div class="hero-panel">
+            <div class="hero-copy">
+              <span class="hero-eyebrow">SMART FRONT DESK / محاكاة</span>
+              <h2 id="clinicHeroTitle">المريض المناسب، في الموعد المناسب، من غير كرسي فاضي.</h2>
+              <p>المساعد يرتّب ضغط اليوم، يوضح أسباب احتمال الغياب، ويقترح إجراءً يمكن للموظف مراجعته قبل تنفيذه.</p>
+              <div class="hero-proof">
+                <span>توقع غياب قابل للتفسير</span>
+                <span>ملء الموعد من قائمة الانتظار</span>
+                <span>تذكيرات واتساب تجريبية</span>
+              </div>
+            </div>
+            <div class="hero-score">
+              <small>جاهزية تشغيل اليوم</small>
+              <strong id="clinicScore">92%</strong>
+              <p id="clinicScoreNote">موعد واحد يحتاج تأكيدًا مبكرًا</p>
+            </div>
+          </div>
+
+          <div class="kpi-grid" aria-label="مؤشرات العيادة اليوم">
+            <article class="kpi"><span class="kpi-label">حجوزات اليوم</span><strong class="kpi-value" id="kpiBookings">٠</strong><span class="kpi-meta trend-up" id="kpiBookingsMeta">يتم الحساب</span></article>
+            <article class="kpi"><span class="kpi-label">مواعيد معرضة للغياب</span><strong class="kpi-value" id="kpiRisk">٠</strong><span class="kpi-meta trend-warn">تحتاج متابعة بشرية</span></article>
+            <article class="kpi"><span class="kpi-label">متوسط الانتظار</span><strong class="kpi-value" id="kpiWait">٠ د</strong><span class="kpi-meta trend-up">أقل من حد ١٥ دقيقة</span></article>
+            <article class="kpi"><span class="kpi-label">إيراد محقق اليوم</span><strong class="kpi-value" id="kpiRevenue">٠</strong><span class="kpi-meta">من الزيارات المكتملة</span></article>
+          </div>
+        </section>
+
+        <section class="workspace-grid" id="clinic-appointments" aria-labelledby="appointmentsTitle">
+          <article class="panel">
+            <div class="panel-head">
+              <div><h2 class="panel-title" id="appointmentsTitle">جدول المواعيد</h2><span class="panel-subtitle">اضغط على أي صف لمراجعة الإجراء المقترح</span></div>
+              <div class="panel-actions">
+                <div class="filter-row" aria-label="تصفية المواعيد">
+                  <button class="filter-btn" type="button" aria-pressed="true" data-filter="all">الكل</button>
+                  <button class="filter-btn" type="button" aria-pressed="false" data-filter="risk">مخاطرة</button>
+                  <button class="filter-btn" type="button" aria-pressed="false" data-filter="waiting">في الانتظار</button>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body flush">
+              <div class="table-shell">
+                <table class="data-table">
+                  <thead><tr><th>الوقت</th><th>المريض</th><th>الزيارة</th><th>الحالة</th><th>احتمال الغياب</th><th>الإجراء</th></tr></thead>
+                  <tbody id="appointmentRows"></tbody>
+                </table>
+              </div>
+            </div>
+          </article>
+
+          <div class="stack" id="clinic-smart">
+            <article class="smart-card">
+              <span class="smart-label">NO-SHOW SIGNAL</span>
+              <h3 id="riskHeadline">جاري تحليل جدول اليوم</h3>
+              <p id="riskExplanation">التحليل يعتمد على بيانات تجريبية: سجل الحضور، توقيت الموعد، ومدة التأكيد.</p>
+              <div class="confidence"><div class="confidence-track" aria-hidden="true"><span id="riskConfidenceBar" style="width:0%"></span></div><b id="riskConfidence">٠٪</b></div>
+              <button class="btn btn-block" type="button" id="secureSlotBtn">راجع الإجراء المقترح</button>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head"><div><h2 class="panel-title">قائمة الانتظار الذكية</h2><span class="panel-subtitle">مرشّحة حسب نوع الكشف والوقت</span></div><span class="status status-info" id="waitlistCount">٠ مرشحين</span></div>
+              <div class="panel-body"><div class="insight-list" id="waitlistList"></div></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="workspace-grid" id="clinic-reports" aria-labelledby="reportsTitle">
+          <article class="panel">
+            <div class="panel-head">
+              <div><h2 class="panel-title" id="reportsTitle">أثر التشغيل والمتابعة</h2><span class="panel-subtitle">مؤشرات تجريبية قبل/بعد تطبيق النظام</span></div>
+              <button class="btn btn-small" type="button" id="sendReportBtn">معاينة تقرير ٩ مساءً</button>
+            </div>
+            <div class="panel-body">
+              <div class="bar-list">
+                <div class="bar-row"><label>غياب قبل النظام</label><div class="bar-track"><span style="width:80%"></span></div><b>٢٤٪</b></div>
+                <div class="bar-row"><label>غياب بعد التذكير</label><div class="bar-track"><span style="width:30%"></span></div><b>٩٪</b></div>
+                <div class="bar-row"><label>تأكيدات تلقائية</label><div class="bar-track"><span style="width:72%"></span></div><b>٧٢٪</b></div>
+                <div class="bar-row"><label>إشغال قائمة الانتظار</label><div class="bar-track"><span style="width:88%"></span></div><b>٨٨٪</b></div>
+              </div>
+            </div>
+          </article>
+
+          <div class="stack">
+            <article class="panel panel-dark">
+              <div class="panel-head"><div><h2 class="panel-title">إشارة ضغط اليوم</h2><span class="panel-subtitle">تُحدّث من جدول المواعيد الحالي</span></div></div>
+              <div class="panel-body" id="loadSignal"></div>
+            </article>
+            <article class="panel">
+              <div class="panel-head"><div><h2 class="panel-title">إجراءات سريعة</h2><span class="panel-subtitle">كلها محاكاة ولا ترسل أي رسالة</span></div></div>
+              <div class="panel-body stack">
+                <button class="btn btn-block" type="button" id="sendRemindersBtn">محاكاة إرسال تذكيرات اليوم</button>
+                <button class="btn btn-block" type="button" id="optimizeBtn">اقترح ترتيبًا أفضل للجدول</button>
+                <button class="btn btn-danger btn-block" type="button" id="resetBtn">إعادة بيانات الديمو</button>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="launch-gate" id="launchGate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+    <section class="gate-card">
+      <div class="gate-top"><span class="brand-mark" aria-hidden="true"></span><span class="v2-badge">Clinic V2</span></div>
+      <h1 id="gateTitle">شوف يوم عيادتك قبل ما يبدأ</h1>
+      <p>اكتب اسم العيادة لتخصيص المحاكاة. البيانات تظل داخل الصفحة ولا يتم إرسال أي شيء.</p>
+      <form class="gate-form" id="launchForm" autocomplete="off">
+        <label class="sr-only" for="businessName">اسم العيادة</label>
+        <input id="businessName" name="businessName" maxlength="60" required autocomplete="off" placeholder="مثال: عيادة تجريبية ENGAZ">
+        <button class="btn btn-primary" type="submit">افتح النظام</button>
+      </form>
+      <p class="field-hint demo-warning">للعرض فقط — لا تدخل بيانات مرضى حقيقية.</p>
+      <div class="gate-facts"><div class="gate-fact"><strong>V2 THEME</strong><span>نفس هوية الموقع الجديدة</span></div><div class="gate-fact"><strong>SMART SIGNALS</strong><span>توصيات قابلة للتفسير</span></div><div class="gate-fact"><strong>SAFE DEMO</strong><span>لا بيانات أو رسائل حقيقية</span></div></div>
+    </section>
+  </div>
+
+  <dialog id="demoDialog" aria-labelledby="dialogTitle">
+    <div class="dialog-head"><div><span class="dialog-kicker" data-dialog-kicker></span><h2 class="dialog-title" id="dialogTitle" data-dialog-title></h2></div><button class="dialog-close" type="button" data-dialog-close aria-label="إغلاق النافذة">×</button></div>
+    <div class="dialog-body" data-dialog-body></div>
+    <div class="dialog-actions" data-dialog-actions></div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="sr-only" id="liveStatus" aria-live="polite"></div>
+
+  <script src="v2-core.js"></script>
+  <script>
+  (function () {
+    'use strict';
+    var E = window.EngazV2;
+    var prices = { 'كشف': 300, 'متابعة': 150, 'استشارة': 350 };
+    var originalAppointments = [
+      { id: 1, time: '٤:٠٠', name: 'مريض تجريبي ١', phone: 'TEST-001', type: 'كشف', status: 'completed', noShows: 0, wait: 5, confirmed: true },
+      { id: 2, time: '٤:٣٠', name: 'مريض تجريبي ٢', phone: 'TEST-002', type: 'متابعة', status: 'waiting', noShows: 0, wait: 11, confirmed: true },
+      { id: 3, time: '٥:٠٠', name: 'مريض تجريبي ٣', phone: 'TEST-003', type: 'كشف', status: 'upcoming', noShows: 2, wait: 0, confirmed: false },
+      { id: 4, time: '٥:٣٠', name: 'مريض تجريبي ٤', phone: 'TEST-004', type: 'استشارة', status: 'upcoming', noShows: 0, wait: 0, confirmed: true },
+      { id: 5, time: '٦:٠٠', name: 'مريض تجريبي ٥', phone: 'TEST-005', type: 'متابعة', status: 'upcoming', noShows: 1, wait: 0, confirmed: false },
+      { id: 6, time: '٦:٣٠', name: 'مريض تجريبي ٦', phone: 'TEST-006', type: 'كشف', status: 'upcoming', noShows: 0, wait: 0, confirmed: true }
+    ];
+    var originalWaitlist = [
+      { id: 101, name: 'مرشح تجريبي ١', phone: 'TEST-W101', type: 'كشف', window: 'من ٥ إلى ٧' },
+      { id: 102, name: 'مرشح تجريبي ٢', phone: 'TEST-W102', type: 'متابعة', window: 'بعد ٦ مساءً' },
+      { id: 103, name: 'مرشح تجريبي ٣', phone: 'TEST-W103', type: 'كشف', window: 'أي وقت اليوم' }
+    ];
+    var appointments = clone(originalAppointments);
+    var waitlist = clone(originalWaitlist);
+    var filter = 'all';
+
+    function clone(value) { return JSON.parse(JSON.stringify(value)); }
+    function clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
+    function riskScore(item) {
+      var score = 12 + item.noShows * 29 + (item.confirmed ? -9 : 22) + (item.time.indexOf('٦') === 0 ? 6 : 0);
+      return clamp(score, 5, 94);
+    }
+    function riskLevel(score) { return score >= 65 ? 'high' : score >= 35 ? 'medium' : 'low'; }
+    function riskText(score) { return score >= 65 ? 'مرتفع' : score >= 35 ? 'متوسط' : 'منخفض'; }
+    function statusText(status) { return { completed: 'تم الكشف', waiting: 'في الانتظار', upcoming: 'قادم', secured: 'تم التأكيد' }[status] || 'قادم'; }
+    function statusClass(status) { return status === 'completed' ? 'status-good' : status === 'waiting' ? 'status-warn' : status === 'secured' ? 'status-info' : 'status-muted'; }
+
+    function renderAppointments() {
+      var rows = E.q('#appointmentRows');
+      E.clear(rows);
+      appointments.filter(function (item) {
+        if (filter === 'risk') return riskScore(item) >= 35 && item.status !== 'completed';
+        if (filter === 'waiting') return item.status === 'waiting';
+        return true;
+      }).forEach(function (item) {
+        var score = riskScore(item);
+        var tr = E.el('tr');
+        var nameCell = E.el('td');
+        nameCell.append(E.el('span', { className: 'cell-main', text: item.name }), E.el('span', { className: 'cell-sub', text: item.phone }));
+        var status = E.el('span', { className: 'status ' + statusClass(item.status), text: statusText(item.status) });
+        var risk = E.el('span', { className: 'risk risk-' + riskLevel(score), text: riskText(score) + ' · ' + E.arNumber(score) + '٪' });
+        var action = E.el('button', { className: 'row-action', text: item.status === 'completed' ? 'متابعة لاحقة' : 'راجع', type: 'button', dataset: { appointmentId: item.id } });
+        tr.append(E.el('td', { text: item.time }), nameCell, E.el('td', { text: item.type }), E.el('td', { children: [status] }), E.el('td', { children: [risk] }), E.el('td', { children: [action] }));
+        rows.append(tr);
+      });
+      renderMetrics();
+      renderSmartSignal();
+      renderLoadSignal();
+    }
+
+    function renderMetrics() {
+      var active = appointments.filter(function (item) { return item.status !== 'completed'; });
+      var risky = active.filter(function (item) { return riskScore(item) >= 35; });
+      var waiting = appointments.filter(function (item) { return item.status === 'waiting'; });
+      var averageWait = waiting.length ? Math.round(waiting.reduce(function (sum, item) { return sum + item.wait; }, 0) / waiting.length) : 0;
+      var revenue = appointments.filter(function (item) { return item.status === 'completed'; }).reduce(function (sum, item) { return sum + (prices[item.type] || 0); }, 0);
+      E.q('#kpiBookings').textContent = E.arNumber(appointments.length);
+      E.q('#kpiBookingsMeta').textContent = E.arNumber(active.length) + ' موعد متبقّي';
+      E.q('#kpiRisk').textContent = E.arNumber(risky.length);
+      E.q('#kpiWait').textContent = E.arNumber(averageWait) + ' د';
+      E.q('#kpiRevenue').textContent = E.money(revenue);
+      var readiness = clamp(100 - risky.length * 8 - Math.max(0, averageWait - 10), 60, 98);
+      E.q('#clinicScore').textContent = readiness + '%';
+      E.q('#clinicScoreNote').textContent = risky.length ? E.arNumber(risky.length) + ' موعد يحتاج تأكيدًا مبكرًا' : 'كل مواعيد اليوم مؤكدة';
+    }
+
+    function highRiskAppointment() {
+      return appointments.filter(function (item) { return item.status !== 'completed'; }).sort(function (a, b) { return riskScore(b) - riskScore(a); })[0] || null;
+    }
+
+    function renderSmartSignal() {
+      var item = highRiskAppointment();
+      var score = item ? riskScore(item) : 0;
+      E.q('#riskHeadline').textContent = item ? item.name + ' يحتاج تأكيدًا قبل ' + item.time : 'لا توجد مخاطرة حالية';
+      E.q('#riskExplanation').textContent = item ? (item.noShows ? 'السبب: سجل غياب سابق وعدم تأكيد الموعد حتى الآن.' : 'السبب: الموعد لم يُؤكد بعد ووقت الزيارة قريب.') : 'كل المواعيد مكتملة أو مؤكدة.';
+      E.q('#riskConfidence').textContent = E.arNumber(score) + '٪';
+      E.q('#riskConfidenceBar').style.width = score + '%';
+      E.q('#secureSlotBtn').disabled = !item;
+      renderWaitlist();
+    }
+
+    function renderWaitlist() {
+      var list = E.q('#waitlistList');
+      E.clear(list);
+      E.q('#waitlistCount').textContent = E.arNumber(waitlist.length) + ' مرشحين';
+      waitlist.slice(0, 3).forEach(function (person, index) {
+        var item = E.el('div', { className: 'insight' });
+        var text = E.el('div');
+        text.append(E.el('strong', { text: person.name + ' · ' + person.type }), E.el('p', { text: person.window }));
+        item.append(E.el('span', { className: 'insight-num', text: '0' + (index + 1) }), text);
+        list.append(item);
+      });
+      if (!waitlist.length) list.append(E.el('p', { className: 'empty-state', text: 'قائمة الانتظار فارغة حاليًا' }));
+    }
+
+    function renderLoadSignal() {
+      var slots = { '٤': 0, '٥': 0, '٦': 0 };
+      appointments.forEach(function (item) { var hour = item.time.charAt(0); if (slots[hour] != null) slots[hour] += 1; });
+      var peak = Object.keys(slots).sort(function (a, b) { return slots[b] - slots[a]; })[0];
+      var wrap = E.q('#loadSignal');
+      E.clear(wrap);
+      wrap.append(E.el('div', { className: 'result-box', children: [E.el('strong', { text: 'أعلى ضغط متوقع: الساعة ' + peak }), E.el('p', { text: 'اقتراح: اترك ١٠ دقائق مرنة قبل هذه الفترة لاستقبال الحالات المتأخرة.' })] }));
+    }
+
+    function showAppointment(item) {
+      if (!item) return;
+      var score = riskScore(item);
+      var content = E.resultBox(item.name + ' · ' + item.time, 'درجة احتمال الغياب ' + E.arNumber(score) + '٪ — ' + riskText(score) + '.', [
+        item.confirmed ? 'الموعد مؤكد بالفعل.' : 'لا يوجد تأكيد حديث للموعد.',
+        item.noShows ? 'لديه ' + E.arNumber(item.noShows) + ' حالة غياب سابقة في البيانات التجريبية.' : 'لا يوجد غياب سابق مسجّل.',
+        'القرار النهائي لموظف الاستقبال؛ النظام يقترح فقط.'
+      ]);
+      var actions = [];
+      if (item.status === 'completed') {
+        actions.push({ label: 'جدولة متابعة بعد ٣٠ يومًا', className: 'btn-primary', onClick: function () { scheduleFollowup(item); } });
+      } else {
+        actions.push({ label: 'محاكاة رسالة تأكيد', className: 'btn-primary', onClick: function () { item.confirmed = true; item.status = 'secured'; renderAppointments(); E.toast('تمت محاكاة رسالة التأكيد — لم يتم إرسال رسالة حقيقية.', 'success'); E.announce('تم تأمين موعد ' + item.name); } });
+        actions.push({ label: 'تم الكشف', onClick: function () { item.status = 'completed'; item.wait = 0; renderAppointments(); E.toast('تم تحديث الزيارة محليًا.', 'success'); } });
+      }
+      E.showDialog({ kicker: 'APPOINTMENT REVIEW', title: 'مراجعة الموعد', content: content, actions: actions });
+    }
+
+    function scheduleFollowup(item) {
+      var id = Date.now();
+      appointments.push({ id: id, time: '٥:٠٠', name: item.name, phone: item.phone, type: 'متابعة', status: 'upcoming', noShows: item.noShows, wait: 0, confirmed: false });
+      renderAppointments();
+      E.toast('أُضيفت متابعة تجريبية مع تذكير مقترح.', 'success');
+    }
+
+    function openSecureSuggestion() {
+      var item = highRiskAppointment();
+      if (!item) return;
+      var candidate = waitlist.find(function (person) { return person.type === item.type; }) || waitlist[0];
+      var reasons = ['ابدأ بتأكيد موعد ' + item.name + ' قبل اتخاذ أي إجراء.', 'إذا لم يؤكد، المرشح الأقرب هو ' + (candidate ? candidate.name : 'لا يوجد مرشح حاليًا') + '.', 'كل الرسائل هنا معاينة فقط وتحتاج قرار الموظف.'];
+      var content = E.resultBox('خطة تأمين الكرسي ' + item.time, 'المساعد جهّز مسارًا من خطوتين بدل إلغاء الموعد مباشرة.', reasons);
+      E.showDialog({ kicker: 'SMART WAITLIST', title: 'الإجراء المقترح', content: content, actions: [
+        { label: 'أكد الموعد الأصلي', className: 'btn-primary', onClick: function () { item.confirmed = true; item.status = 'secured'; renderAppointments(); E.toast('تم تأكيد الموعد داخل المحاكاة.', 'success'); } },
+        { label: 'املأ من الانتظار', close: false, onClick: function () { if (!candidate) { E.toast('لا يوجد مرشح متاح.', 'warning'); return; } item.name = candidate.name; item.phone = candidate.phone; item.noShows = 0; item.confirmed = true; item.status = 'secured'; waitlist = waitlist.filter(function (person) { return person.id !== candidate.id; }); renderAppointments(); E.closeDialog(); E.toast('تم ملء الموعد تجريبيًا من قائمة الانتظار.', 'success'); } }
+      ] });
+    }
+
+    function openBooking() {
+      var form = E.el('form', { className: 'form-grid', attrs: { novalidate: 'novalidate' } });
+      form.addEventListener('submit', function (event) { event.preventDefault(); });
+      var name = E.field({ id: 'patientName', label: 'اسم المريض', required: true, maxLength: 60, placeholder: 'الاسم بالكامل', attrs: { autocomplete: 'off' } });
+      var phone = E.field({ id: 'patientPhone', label: 'رقم الموبايل', type: 'tel', required: true, maxLength: 15, placeholder: 'TEST-001', attrs: { inputmode: 'tel', autocomplete: 'off' } });
+      var type = E.field({ id: 'visitType', label: 'نوع الزيارة', type: 'select', options: Object.keys(prices).map(function (value) { return { label: value + ' · ' + E.money(prices[value]), value: value }; }) });
+      var occupied = appointments.map(function (item) { return item.time; });
+      var allSlots = ['٤:٠٠', '٤:٣٠', '٥:٠٠', '٥:٣٠', '٦:٠٠', '٦:٣٠', '٧:٠٠', '٧:٣٠'];
+      var available = allSlots.filter(function (slot) { return occupied.indexOf(slot) === -1; });
+      var time = E.field({ id: 'visitTime', label: 'الموعد المتاح', type: 'select', options: available.map(function (value) { return { label: value, value: value }; }) });
+      var error = E.el('p', { className: 'field-error full', attrs: { role: 'alert' } });
+      form.append(name.wrap, phone.wrap, type.wrap, time.wrap, E.el('p', { className: 'field-hint demo-warning full', text: 'للعرض فقط — لا تدخل بيانات مرضى حقيقية.' }), error);
+      E.showDialog({ kicker: 'SMART BOOKING', title: 'حجز موعد جديد', content: form, actions: [
+        { label: 'حفظ ومحاكاة التذكير', className: 'btn-primary', close: false, onClick: function () {
+          var patient = E.cleanText(name.input.value, 60);
+          var mobile = E.phoneDigits(phone.input.value);
+          var visitType = prices[type.input.value] ? type.input.value : '';
+          var slot = available.indexOf(time.input.value) >= 0 ? time.input.value : '';
+          if (patient.length < 2 || !E.validPhone(mobile) || !visitType || !slot) { error.textContent = 'اكتب اسمًا صحيحًا ورقم موبايل من ١٠–١٥ رقمًا واختر موعدًا متاحًا.'; return; }
+          appointments.push({ id: Date.now(), time: slot, name: patient, phone: mobile, type: visitType, status: 'upcoming', noShows: 0, wait: 0, confirmed: false });
+          renderAppointments(); E.closeDialog(); E.toast('تم الحجز. معاينة تذكير قبل ٢٤ ساعة وقبل ساعتين — بدون إرسال فعلي.', 'success'); E.announce('تمت إضافة حجز جديد باسم ' + patient);
+        } },
+        { label: 'إلغاء' }
+      ] });
+      window.setTimeout(function () { name.input.focus(); }, 50);
+    }
+
+    function showDailyBrief() {
+      var active = appointments.filter(function (item) { return item.status !== 'completed'; });
+      var risky = active.filter(function (item) { return riskScore(item) >= 35; });
+      var text = 'عندك ' + E.arNumber(active.length) + ' مواعيد متبقية، و' + E.arNumber(risky.length) + ' يحتاج تأكيدًا. أعلى ضغط متوقع بين الخامسة والسادسة.';
+      E.showDialog({ kicker: 'DAILY COPILOT', title: 'ملخص اليوم الذكي', content: E.resultBox('ما يحتاج انتباهك الآن', text, ['ابدأ بتأكيد أعلى موعد مخاطرة.', 'اترك ١٠ دقائق مرنة وقت الذروة.', 'راجع قائمة الانتظار قبل أي إلغاء.']) });
+    }
+
+    function showNightReport() {
+      var completed = appointments.filter(function (item) { return item.status === 'completed'; });
+      var revenue = completed.reduce(function (sum, item) { return sum + (prices[item.type] || 0); }, 0);
+      E.showDialog({ kicker: '9 PM REPORT / PREVIEW', title: 'تقرير صاحب العيادة', content: E.resultBox('ملخص تجريبي على الموبايل', 'تمت ' + E.arNumber(completed.length) + ' زيارات بإيراد ' + E.money(revenue) + '. نسبة الغياب التجريبية بعد التذكير ٩٪.', ['هذه معاينة داخل الصفحة فقط.', 'لا يتم إرسال بيانات مرضى أو رسائل واتساب.', 'يمكن تخصيص المؤشرات حسب العيادة.']) });
+    }
+
+    function sendReminders() {
+      var count = 0;
+      appointments.forEach(function (item) { if (item.status === 'upcoming' && !item.confirmed) { item.confirmed = true; item.status = 'secured'; count += 1; } });
+      renderAppointments();
+      E.toast('تمت محاكاة ' + E.arNumber(count) + ' رسائل تذكير — بدون إرسال فعلي.', 'success');
+      E.announce('اكتملت محاكاة التذكيرات');
+    }
+
+    function optimizeSchedule() {
+      appointments.sort(function (a, b) { return riskScore(b) - riskScore(a); });
+      E.toast('تم ترتيب قائمة المراجعة حسب المخاطرة؛ أوقات المرضى لم تتغير.', 'success');
+      renderAppointments();
+    }
+
+    function resetDemo() {
+      appointments = clone(originalAppointments);
+      waitlist = clone(originalWaitlist);
+      filter = 'all';
+      E.qa('[data-filter]').forEach(function (button) { button.setAttribute('aria-pressed', button.dataset.filter === 'all' ? 'true' : 'false'); });
+      renderAppointments();
+      E.toast('رجعت بيانات Clinic V2 للوضع الأصلي.', 'success');
+    }
+
+    E.bindGate('عيادة تجريبية ENGAZ');
+    E.bindDialogClose();
+    renderAppointments();
+
+    E.qa('[data-scroll]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        E.qa('[data-scroll]').forEach(function (item) { item.removeAttribute('aria-current'); });
+        button.setAttribute('aria-current', 'page');
+        var target = E.q('#' + button.dataset.scroll);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+    E.qa('[data-filter]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        filter = ['all', 'risk', 'waiting'].indexOf(button.dataset.filter) >= 0 ? button.dataset.filter : 'all';
+        E.qa('[data-filter]').forEach(function (item) { item.setAttribute('aria-pressed', item === button ? 'true' : 'false'); });
+        renderAppointments();
+      });
+    });
+    E.q('#appointmentRows').addEventListener('click', function (event) {
+      var button = event.target.closest('[data-appointment-id]');
+      if (!button) return;
+      var id = Number(button.dataset.appointmentId);
+      showAppointment(appointments.find(function (item) { return item.id === id; }));
+    });
+    E.q('#newBookingBtn').addEventListener('click', openBooking);
+    E.q('#dailyBriefBtn').addEventListener('click', showDailyBrief);
+    E.q('#secureSlotBtn').addEventListener('click', openSecureSuggestion);
+    E.q('#sendReportBtn').addEventListener('click', showNightReport);
+    E.q('#sendRemindersBtn').addEventListener('click', sendReminders);
+    E.q('#optimizeBtn').addEventListener('click', optimizeSchedule);
+    E.q('#resetBtn').addEventListener('click', resetDemo);
+  }());
+  </script>
+</body>
+</html>

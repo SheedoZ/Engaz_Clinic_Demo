@@ -1,0 +1,120 @@
+name: Static safety
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Static safety
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Check required files and CNAME
+        run: |
+          set -eu
+          test -f index.html
+          test -f v2-core.js
+          test -f v2-theme.css
+          test -f CNAME
+          test -f README.md
+          test "$(tr -d '\r\n' < CNAME)" = 'clinic.engaz.premiumpower-eg.com'
+
+      - name: Check JavaScript syntax
+        run: |
+          set -eu
+          node --check v2-core.js
+          node <<'NODE'
+          const fs = require('fs');
+          const vm = require('vm');
+          const html = fs.readFileSync('index.html', 'utf8');
+          const scripts = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)]
+            .filter((match) => !/\bsrc\s*=/.test(match[0]))
+            .map((match) => match[1]);
+          if (scripts.length !== 1) throw new Error(`expected one inline script, found ${scripts.length}`);
+          new vm.Script(scripts[0], { filename: 'index-inline.js' });
+          NODE
+
+      - name: Check links and external URL allowlist
+        run: |
+          set -eu
+          node <<'NODE'
+          const fs = require('fs');
+          const html = fs.readFileSync('index.html', 'utf8');
+          const allowedUrls = new Set([
+            'https://engaz.premiumpower-eg.com/',
+            'https://clinic.engaz.premiumpower-eg.com/',
+            'https://lab.engaz.premiumpower-eg.com/',
+            'https://automation.engaz.premiumpower-eg.com/'
+          ]);
+          const refs = [...html.matchAll(/\b(?:href|src)\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]);
+          for (const ref of refs) {
+            if (/^https?:\/\//i.test(ref)) {
+              if (!allowedUrls.has(ref)) throw new Error(`external URL is not allowlisted: ${ref}`);
+            } else if (!/^#|^(?:\.\/)?(?:v2-theme\.css|v2-core\.js)$/.test(ref)) {
+              throw new Error(`broken or forbidden relative link: ${ref}`);
+            }
+          }
+          const files = ['index.html', 'v2-core.js', 'v2-theme.css', 'README.md'];
+          const externalPattern = /https?:\/\/[^\s"'<>`)]+/gi;
+          for (const file of files) {
+            const text = fs.readFileSync(file, 'utf8');
+            for (const raw of text.match(externalPattern) || []) {
+              const url = raw.replace(/[),.;]+$/, '');
+              if (!allowedUrls.has(url)) throw new Error(`external URL is not allowlisted in ${file}: ${url}`);
+            }
+          }
+          NODE
+
+      - name: Check secrets, PII, network APIs, and Google Fonts
+        run: |
+          set -eu
+          node <<'NODE'
+          const fs = require('fs');
+          const files = ['index.html', 'v2-core.js', 'v2-theme.css', 'README.md'];
+          const source = files.map((file) => fs.readFileSync(file, 'utf8')).join('\n');
+          const checks = [
+            [/api[_-]?key|client[_-]?secret|access[_-]?token|authorization\s*:\s*bearer|-----begin [^-]+ private key-----|\b(?:password|passwd|secret|token)\b\s*[:=]/i, 'credential marker'],
+            [/01[0125]\d{8}/, 'Egyptian phone number'],
+            [/fonts\.googleapis\.com|fonts\.gstatic\.com/i, 'Google Fonts import'],
+            [/\b(?:fetch|XMLHttpRequest|WebSocket)\s*\(/, 'network API'],
+            [/\b(?:localStorage|sessionStorage)\b|document\.cookie|\beval\s*\(|\.innerHTML\b/i, 'forbidden browser API']
+          ];
+          for (const [pattern, label] of checks) if (pattern.test(source)) throw new Error(`found ${label}`);
+          for (const original of ['عيادة د. أحمد سعيد', 'مريم عادل', 'عمر حمدي', 'سلمى أحمد', 'يوسف محمود', 'نورهان علي', 'أحمد سامي', 'هبة محمد', 'كريم طارق', 'آية حسن']) {
+            if (source.includes(original)) throw new Error(`residual personal name: ${original}`);
+          }
+          NODE
+
+      - name: Check repository paths and line endings
+        run: |
+          set -eu
+          git diff --check
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const decoder = new TextDecoder('utf-8', { fatal: true });
+          const allowed = new Set(['.gitattributes', '.gitignore', '.nojekyll', 'CNAME', 'README.md', 'index.html', 'v2-core.js', 'v2-theme.css', '.github/workflows/validate.yml']);
+          function walk(dir) {
+            for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+              if (entry.name === '.git') continue;
+              const relative = path.relative('.', path.join(dir, entry.name)).replaceAll(path.sep, '/');
+              if (entry.isDirectory()) walk(path.join(dir, entry.name));
+              else if (!allowed.has(relative)) throw new Error(`forbidden path: ${relative}`);
+            }
+          }
+          walk('.');
+          for (const file of allowed) {
+            if (!fs.existsSync(file) || fs.statSync(file).isDirectory()) continue;
+            const bytes = fs.readFileSync(file);
+            decoder.decode(bytes);
+            if (bytes.includes(0x0d)) throw new Error(`CRLF line ending found: ${file}`);
+          }
+          NODE
