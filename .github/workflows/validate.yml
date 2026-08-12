@@ -101,7 +101,7 @@ jobs:
           const fs = require('fs');
           const path = require('path');
           const decoder = new TextDecoder('utf-8', { fatal: true });
-          const allowed = new Set(['.gitattributes', '.gitignore', '.nojekyll', 'CNAME', 'README.md', 'index.html', 'v2-core.js', 'v2-theme.css', '.github/workflows/validate.yml']);
+          const allowed = new Set(['.gitattributes', '.gitignore', '.nojekyll', 'CNAME', 'README.md', 'PROJECT_GUIDE.md', 'index.html', 'v2-core.js', 'v2-theme.css', '.github/workflows/validate.yml']);
           function walk(dir) {
             for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
               if (entry.name === '.git') continue;
