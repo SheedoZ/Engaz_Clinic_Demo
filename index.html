@@ -4,160 +4,480 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#02143f">
+  <meta name="description" content="محاكاة تشغيلية آمنة لنظام إدارة العيادات ENGAZ Clinic V2 — بيانات تجريبية بالكامل داخل المتصفح.">
+  <meta name="theme-color" content="#0b2740">
   <title>ENGAZ Clinic V2 — ديمو العيادات الذكي</title>
   <link rel="stylesheet" href="v2-theme.css">
 </head>
 <body>
-  <a class="skip-link" href="#mainContent">تخطَّ إلى محتوى الديمو</a>
+  <a class="skip-link" href="#mainContent">تخطَّ إلى محتوى الديمو</a>
 
   <header class="demo-header">
     <div class="header-inner">
+      <button class="icon-btn nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="sidebar" aria-label="فتح قائمة الأقسام">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
+      </button>
+
       <a class="brand" href="https://engaz.premiumpower-eg.com/" aria-label="العودة إلى موقع إنجاز">
         <span class="brand-mark" aria-hidden="true"></span>
         <span class="brand-copy"><strong>ENGAZ</strong><small>BUSINESS OPERATING SYSTEM</small></span>
       </a>
+
       <nav class="demo-switch" aria-label="التنقل بين ديموهات V2">
         <a href="https://clinic.engaz.premiumpower-eg.com/" aria-current="page">العيادة</a>
         <a href="https://lab.engaz.premiumpower-eg.com/">المعمل</a>
         <a href="https://automation.engaz.premiumpower-eg.com/">الأتمتة</a>
       </nav>
-      <div class="header-badges" aria-label="حالة الديمو">
-        <span class="v2-badge">Clinic V2</span>
-        <span class="simulation-badge">محاكاة آمنة</span>
+
+      <div class="header-tools">
+        <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="التبديل إلى الوضع الداكن">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16.6a4.6 4.6 0 1 0 0-9.2 4.6 4.6 0 0 0 0 9.2Z"/><path d="M12 2v2.2"/><path d="M12 19.8V22"/><path d="M2 12h2.2"/><path d="M19.8 12H22"/><path d="M5 5l1.6 1.6"/><path d="M17.4 17.4 19 19"/><path d="M19 5l-1.6 1.6"/><path d="M6.6 17.4 5 19"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13.6A8.4 8.4 0 1 1 10.4 4a6.9 6.9 0 0 0 9.6 9.6Z"/></svg>
+        </button>
+        <div class="header-badges" aria-label="حالة الديمو">
+          <span class="v2-badge">Clinic V2</span>
+          <span class="simulation-badge">محاكاة آمنة</span>
+        </div>
       </div>
     </div>
   </header>
 
   <div class="app-shell">
-    <aside class="sidebar" aria-label="أقسام نظام العيادة">
+    <button class="sidebar-backdrop" id="sidebarBackdrop" type="button" hidden aria-label="إغلاق قائمة الأقسام"></button>
+
+    <aside class="sidebar" id="sidebar" aria-label="أقسام نظام العيادة">
       <div class="tenant">
         <span class="tenant-label">مساحة العمل الحالية</span>
         <strong data-tenant-name>عيادة تجريبية ENGAZ</strong>
         <span class="live-line"><span class="live-dot" aria-hidden="true"></span> النظام يعمل الآن</span>
       </div>
-      <nav class="side-nav">
-        <button type="button" aria-current="page" data-scroll="clinic-overview"><span class="nav-icon" aria-hidden="true">01</span> نظرة اليوم</button>
-        <button type="button" data-scroll="clinic-appointments"><span class="nav-icon" aria-hidden="true">02</span> المواعيد</button>
-        <button type="button" data-scroll="clinic-smart"><span class="nav-icon" aria-hidden="true">03</span> المساعد الذكي</button>
-        <button type="button" data-scroll="clinic-reports"><span class="nav-icon" aria-hidden="true">04</span> التقارير</button>
+
+      <nav class="side-nav" aria-label="الأقسام">
+        <button type="button" data-view="overview" aria-current="page">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/></svg></span>
+          نظرة اليوم
+        </button>
+        <button type="button" data-view="appointments">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 6.5h17v14h-17z"/><path d="M3.5 10.5h17"/><path d="M8 3.5v4"/><path d="M16 3.5v4"/></svg></span>
+          المواعيد
+          <span class="nav-count" data-count="appointments">٠</span>
+        </button>
+        <button type="button" data-view="patients">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M2.5 20.5c0-3.6 2.9-5.5 6.5-5.5s6.5 1.9 6.5 5.5"/><path d="M17 5.2a3.4 3.4 0 0 1 0 6.6"/><path d="M18.5 15.4c2 .7 3 2.4 3 5.1"/></svg></span>
+          ملفات المرضى
+        </button>
+        <button type="button" data-view="billing">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 7.5h17v13h-17z"/><path d="M3.5 7.5c0-1.7 1-2.8 2.8-3l11-1.6"/><path d="M16.5 14h2"/></svg></span>
+          الفوترة والتحصيل
+          <span class="nav-count" data-count="billing">٠</span>
+        </button>
+        <button type="button" data-view="inventory">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 7.6 12 3.5l8.5 4.1v8.8L12 20.5l-8.5-4.1z"/><path d="M3.5 7.6 12 11.8l8.5-4.2"/><path d="M12 11.8v8.7"/></svg></span>
+          المخزون
+          <span class="nav-count" data-count="inventory">٠</span>
+        </button>
+        <button type="button" data-view="smart">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.5 13.8 9l5.7 1.6-4.4 3.9 1 5.8L12 17.6 7.9 20.3l1-5.8-4.4-3.9L10.2 9z"/></svg></span>
+          المساعد الذكي
+        </button>
+        <button type="button" data-view="reports">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M7 20V11"/><path d="M12 20V5"/><path d="M17 20v-6"/></svg></span>
+          التقارير
+        </button>
       </nav>
+
       <div class="side-note">
         <strong>بيانات تجريبية فقط</strong>
-        كل الرسائل والتوصيات في النسخة دي محاكاة محلية. لا يتم إرسال واتساب أو حفظ بيانات مرضى حقيقية.
+        كل الأسماء والأرقام والرسائل هنا محاكاة محلية داخل المتصفح. لا يتم إرسال واتساب، ولا حفظ أي بيانات، ولا الاتصال بأي خدمة خارجية.
       </div>
     </aside>
 
     <main class="content" id="mainContent" tabindex="-1">
       <div class="content-inner">
-        <div class="page-head">
-          <div>
-            <span class="page-kicker">CLINIC OPERATIONS / V2</span>
-            <h1 class="page-title">اليوم تحت السيطرة</h1>
-            <p class="page-summary">حجوزات، قائمة انتظار، متابعة، وتوقع مبكر لاحتمال الغياب — في شاشة تشغيل واحدة.</p>
-          </div>
-          <div class="page-actions">
-            <button class="btn" type="button" id="dailyBriefBtn">ملخص اليوم الذكي</button>
-            <button class="btn btn-primary" type="button" id="newBookingBtn">+ حجز موعد</button>
-          </div>
-        </div>
 
-        <section id="clinic-overview" aria-labelledby="clinicHeroTitle">
+        <!-- ============================ نظرة اليوم ============================ -->
+        <section class="view" data-view-pane="overview" aria-label="نظرة اليوم">
+          <div class="page-head">
+            <div>
+              <span class="page-kicker">CLINIC OPERATIONS / V2</span>
+              <h1 class="page-title">اليوم تحت السيطرة</h1>
+              <p class="page-summary">حجوزات، قائمة انتظار، متابعة، وتوقع مبكر لاحتمال الغياب — في شاشة تشغيل واحدة.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn" type="button" id="dailyBriefBtn">ملخص اليوم الذكي</button>
+              <button class="btn" type="button" id="advanceDayBtn">تشغيل اليوم خطوة</button>
+              <button class="btn btn-primary" type="button" id="newBookingBtn">+ حجز موعد</button>
+            </div>
+          </div>
+
           <div class="hero-panel">
             <div class="hero-copy">
               <span class="hero-eyebrow">SMART FRONT DESK / محاكاة</span>
-              <h2 id="clinicHeroTitle">المريض المناسب، في الموعد المناسب، من غير كرسي فاضي.</h2>
-              <p>المساعد يرتّب ضغط اليوم، يوضح أسباب احتمال الغياب، ويقترح إجراءً يمكن للموظف مراجعته قبل تنفيذه.</p>
+              <h2>المريض المناسب، في الموعد المناسب، من غير كرسي فاضي.</h2>
+              <p>المساعد يرتّب ضغط اليوم، يوضح أسباب احتمال الغياب عاملًا بعامل، ويقترح إجراءً يراجعه الموظف قبل تنفيذه.</p>
               <div class="hero-proof">
                 <span>توقع غياب قابل للتفسير</span>
                 <span>ملء الموعد من قائمة الانتظار</span>
                 <span>تذكيرات واتساب تجريبية</span>
+                <span>تحصيل ومخزون في نفس الشاشة</span>
               </div>
             </div>
             <div class="hero-score">
               <small>جاهزية تشغيل اليوم</small>
-              <strong id="clinicScore">92%</strong>
-              <p id="clinicScoreNote">موعد واحد يحتاج تأكيدًا مبكرًا</p>
+              <div id="readinessGauge"></div>
+              <p id="clinicScoreNote">يتم الحساب…</p>
             </div>
           </div>
 
-          <div class="kpi-grid" aria-label="مؤشرات العيادة اليوم">
-            <article class="kpi"><span class="kpi-label">حجوزات اليوم</span><strong class="kpi-value" id="kpiBookings">٠</strong><span class="kpi-meta trend-up" id="kpiBookingsMeta">يتم الحساب</span></article>
-            <article class="kpi"><span class="kpi-label">مواعيد معرضة للغياب</span><strong class="kpi-value" id="kpiRisk">٠</strong><span class="kpi-meta trend-warn">تحتاج متابعة بشرية</span></article>
-            <article class="kpi"><span class="kpi-label">متوسط الانتظار</span><strong class="kpi-value" id="kpiWait">٠ د</strong><span class="kpi-meta trend-up">أقل من حد ١٥ دقيقة</span></article>
-            <article class="kpi"><span class="kpi-label">إيراد محقق اليوم</span><strong class="kpi-value" id="kpiRevenue">٠</strong><span class="kpi-meta">من الزيارات المكتملة</span></article>
-          </div>
-        </section>
+          <div class="kpi-grid" id="kpiGrid" aria-label="مؤشرات العيادة اليوم"></div>
 
-        <section class="workspace-grid" id="clinic-appointments" aria-labelledby="appointmentsTitle">
-          <article class="panel">
+          <article class="panel section-gap">
             <div class="panel-head">
-              <div><h2 class="panel-title" id="appointmentsTitle">جدول المواعيد</h2><span class="panel-subtitle">اضغط على أي صف لمراجعة الإجراء المقترح</span></div>
-              <div class="panel-actions">
-                <div class="filter-row" aria-label="تصفية المواعيد">
-                  <button class="filter-btn" type="button" aria-pressed="true" data-filter="all">الكل</button>
-                  <button class="filter-btn" type="button" aria-pressed="false" data-filter="risk">مخاطرة</button>
-                  <button class="filter-btn" type="button" aria-pressed="false" data-filter="waiting">في الانتظار</button>
-                </div>
+              <div>
+                <h2 class="panel-title">شريط اليوم</h2>
+                <span class="panel-subtitle">كل خانة نصف ساعة — الشريط السفلي يوضح احتمال الغياب</span>
               </div>
-            </div>
-            <div class="panel-body flush">
-              <div class="table-shell">
-                <table class="data-table">
-                  <thead><tr><th>الوقت</th><th>المريض</th><th>الزيارة</th><th>الحالة</th><th>احتمال الغياب</th><th>الإجراء</th></tr></thead>
-                  <tbody id="appointmentRows"></tbody>
-                </table>
-              </div>
-            </div>
-          </article>
-
-          <div class="stack" id="clinic-smart">
-            <article class="smart-card">
-              <span class="smart-label">NO-SHOW SIGNAL</span>
-              <h3 id="riskHeadline">جاري تحليل جدول اليوم</h3>
-              <p id="riskExplanation">التحليل يعتمد على بيانات تجريبية: سجل الحضور، توقيت الموعد، ومدة التأكيد.</p>
-              <div class="confidence"><div class="confidence-track" aria-hidden="true"><span id="riskConfidenceBar" style="width:0%"></span></div><b id="riskConfidence">٠٪</b></div>
-              <button class="btn btn-block" type="button" id="secureSlotBtn">راجع الإجراء المقترح</button>
-            </article>
-
-            <article class="panel">
-              <div class="panel-head"><div><h2 class="panel-title">قائمة الانتظار الذكية</h2><span class="panel-subtitle">مرشّحة حسب نوع الكشف والوقت</span></div><span class="status status-info" id="waitlistCount">٠ مرشحين</span></div>
-              <div class="panel-body"><div class="insight-list" id="waitlistList"></div></div>
-            </article>
-          </div>
-        </section>
-
-        <section class="workspace-grid" id="clinic-reports" aria-labelledby="reportsTitle">
-          <article class="panel">
-            <div class="panel-head">
-              <div><h2 class="panel-title" id="reportsTitle">أثر التشغيل والمتابعة</h2><span class="panel-subtitle">مؤشرات تجريبية قبل/بعد تطبيق النظام</span></div>
-              <button class="btn btn-small" type="button" id="sendReportBtn">معاينة تقرير ٩ مساءً</button>
+              <button class="btn btn-small" type="button" data-view="appointments">فتح الجدول</button>
             </div>
             <div class="panel-body">
-              <div class="bar-list">
-                <div class="bar-row"><label>غياب قبل النظام</label><div class="bar-track"><span style="width:80%"></span></div><b>٢٤٪</b></div>
-                <div class="bar-row"><label>غياب بعد التذكير</label><div class="bar-track"><span style="width:30%"></span></div><b>٩٪</b></div>
-                <div class="bar-row"><label>تأكيدات تلقائية</label><div class="bar-track"><span style="width:72%"></span></div><b>٧٢٪</b></div>
-                <div class="bar-row"><label>إشغال قائمة الانتظار</label><div class="bar-track"><span style="width:88%"></span></div><b>٨٨٪</b></div>
-              </div>
+              <div class="timeline" id="dayTimeline"></div>
             </div>
           </article>
 
-          <div class="stack">
-            <article class="panel panel-dark">
-              <div class="panel-head"><div><h2 class="panel-title">إشارة ضغط اليوم</h2><span class="panel-subtitle">تُحدّث من جدول المواعيد الحالي</span></div></div>
-              <div class="panel-body" id="loadSignal"></div>
+          <div class="grid-2 section-gap">
+            <article class="panel">
+              <div class="panel-head">
+                <div><h2 class="panel-title">تنبيهات تحتاج قرارًا</h2><span class="panel-subtitle">مولّدة من بيانات الديمو الحالية</span></div>
+              </div>
+              <div class="panel-body"><div class="alert-feed" id="alertFeed"></div></div>
             </article>
+
             <article class="panel">
               <div class="panel-head"><div><h2 class="panel-title">إجراءات سريعة</h2><span class="panel-subtitle">كلها محاكاة ولا ترسل أي رسالة</span></div></div>
               <div class="panel-body stack">
                 <button class="btn btn-block" type="button" id="sendRemindersBtn">محاكاة إرسال تذكيرات اليوم</button>
                 <button class="btn btn-block" type="button" id="optimizeBtn">اقترح ترتيبًا أفضل للجدول</button>
+                <button class="btn btn-block" type="button" id="printBtn">طباعة / حفظ نسخة</button>
                 <button class="btn btn-danger btn-block" type="button" id="resetBtn">إعادة بيانات الديمو</button>
               </div>
             </article>
           </div>
         </section>
+
+        <!-- ============================ المواعيد ============================ -->
+        <section class="view" data-view-pane="appointments" aria-label="المواعيد" hidden>
+          <div class="page-head">
+            <div>
+              <span class="page-kicker">SCHEDULE / اليوم</span>
+              <h1 class="page-title">جدول المواعيد</h1>
+              <p class="page-summary">ابحث، رتّب، حدّد عدة مواعيد، وراجع الإجراء المقترح لكل حالة قبل تنفيذه.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn" type="button" id="apptExportBtn">معاينة تصدير</button>
+              <button class="btn btn-primary" type="button" id="newBookingBtn2">+ حجز موعد</button>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <div class="search-box">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z"/><path d="M16.2 16.2 21 21"/></svg>
+              <input id="apptSearch" type="search" placeholder="ابحث باسم المريض أو الكود…" aria-label="بحث في المواعيد" autocomplete="off" maxlength="40">
+            </div>
+            <div class="chip-row" aria-label="تصفية المواعيد">
+              <button class="filter-btn" type="button" aria-pressed="true" data-filter="all">الكل</button>
+              <button class="filter-btn" type="button" aria-pressed="false" data-filter="risk">مخاطرة</button>
+              <button class="filter-btn" type="button" aria-pressed="false" data-filter="waiting">في الانتظار</button>
+              <button class="filter-btn" type="button" aria-pressed="false" data-filter="unconfirmed">غير مؤكد</button>
+              <button class="filter-btn" type="button" aria-pressed="false" data-filter="completed">تم الكشف</button>
+            </div>
+            <label class="sr-only" for="doctorFilter">تصفية حسب الطبيب</label>
+            <select class="select-inline" id="doctorFilter"></select>
+            <span class="spacer"></span>
+            <span class="pill" id="apptResultCount">٠ نتيجة</span>
+          </div>
+
+          <article class="panel">
+            <div class="bulk-bar" id="bulkBar" hidden>
+              <span id="bulkCount">٠ محدد</span>
+              <span class="spacer"></span>
+              <button class="btn btn-small" type="button" id="bulkConfirmBtn">محاكاة تأكيد الكل</button>
+              <button class="btn btn-small" type="button" id="bulkRemindBtn">محاكاة تذكير الكل</button>
+              <button class="btn btn-small btn-ghost" type="button" id="bulkClearBtn">إلغاء التحديد</button>
+            </div>
+            <div class="panel-body flush">
+              <div class="table-shell">
+                <table class="data-table" id="apptTable">
+                  <thead>
+                    <tr>
+                      <th class="col-check"><input class="row-check" type="checkbox" id="selectAll" aria-label="تحديد كل المواعيد الظاهرة"></th>
+                      <th class="sortable" data-sort-key="slot">الوقت</th>
+                      <th class="sortable" data-sort-key="name">المريض</th>
+                      <th>الطبيب</th>
+                      <th>الزيارة</th>
+                      <th class="sortable" data-sort-key="status">الحالة</th>
+                      <th class="sortable" data-sort-key="risk">احتمال الغياب</th>
+                      <th>الإجراء</th>
+                    </tr>
+                  </thead>
+                  <tbody id="appointmentRows"></tbody>
+                </table>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- ============================ ملفات المرضى ============================ -->
+        <section class="view" data-view-pane="patients" aria-label="ملفات المرضى" hidden>
+          <div class="page-head">
+            <div>
+              <span class="page-kicker">PATIENT RECORDS</span>
+              <h1 class="page-title">ملفات المرضى</h1>
+              <p class="page-summary">سجل تجريبي مختصر لكل مريض: الزيارات، الالتزام بالمواعيد، الرصيد، والوسوم الطبية.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary" type="button" id="newPatientBtn">+ ملف مريض</button>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <div class="search-box">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z"/><path d="M16.2 16.2 21 21"/></svg>
+              <input id="patientSearch" type="search" placeholder="ابحث بالاسم أو الكود…" aria-label="بحث في ملفات المرضى" autocomplete="off" maxlength="40">
+            </div>
+            <div class="chip-row" aria-label="تصفية المرضى">
+              <button class="filter-btn" type="button" aria-pressed="true" data-pfilter="all">الكل</button>
+              <button class="filter-btn" type="button" aria-pressed="false" data-pfilter="risk">التزام منخفض</button>
+              <button class="filter-btn" type="button" aria-pressed="false" data-pfilter="debt">عليه رصيد</button>
+              <button class="filter-btn" type="button" aria-pressed="false" data-pfilter="new">جديد</button>
+            </div>
+            <span class="spacer"></span>
+            <span class="pill" id="patientResultCount">٠ ملف</span>
+          </div>
+
+          <article class="panel">
+            <div class="panel-body flush">
+              <div class="table-shell">
+                <table class="data-table" id="patientTable">
+                  <thead>
+                    <tr>
+                      <th class="sortable" data-sort-key="name">المريض</th>
+                      <th>السن</th>
+                      <th class="sortable" data-sort-key="visits">الزيارات</th>
+                      <th>آخر زيارة</th>
+                      <th class="sortable" data-sort-key="adherence">الالتزام</th>
+                      <th class="sortable" data-sort-key="balance">الرصيد</th>
+                      <th>الوسوم</th>
+                      <th>الملف</th>
+                    </tr>
+                  </thead>
+                  <tbody id="patientRows"></tbody>
+                </table>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- ============================ الفوترة ============================ -->
+        <section class="view" data-view-pane="billing" aria-label="الفوترة والتحصيل" hidden>
+          <div class="page-head">
+            <div>
+              <span class="page-kicker">BILLING / COLLECTION</span>
+              <h1 class="page-title">الفوترة والتحصيل</h1>
+              <p class="page-summary">فواتير تجريبية بحالات مدفوع / معلّق / متأخر، مع توزيع الإيراد على أنواع الزيارات.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn" type="button" id="collectAllBtn">محاكاة تحصيل المعلّق</button>
+            </div>
+          </div>
+
+          <div class="kpi-grid" id="billingKpis"></div>
+
+          <div class="workspace-grid">
+            <article class="panel">
+              <div class="panel-head">
+                <div><h2 class="panel-title">الفواتير</h2><span class="panel-subtitle">اضغط على أي فاتورة لمراجعة تفاصيلها</span></div>
+                <div class="chip-row">
+                  <button class="filter-btn" type="button" aria-pressed="true" data-bfilter="all">الكل</button>
+                  <button class="filter-btn" type="button" aria-pressed="false" data-bfilter="paid">مدفوع</button>
+                  <button class="filter-btn" type="button" aria-pressed="false" data-bfilter="pending">معلّق</button>
+                  <button class="filter-btn" type="button" aria-pressed="false" data-bfilter="overdue">متأخر</button>
+                </div>
+              </div>
+              <div class="panel-body flush">
+                <div class="table-shell">
+                  <table class="data-table" id="invoiceTable">
+                    <thead>
+                      <tr>
+                        <th>رقم</th>
+                        <th class="sortable" data-sort-key="name">المريض</th>
+                        <th>الخدمة</th>
+                        <th class="sortable" data-sort-key="amount">القيمة</th>
+                        <th class="sortable" data-sort-key="age">العمر</th>
+                        <th class="sortable" data-sort-key="status">الحالة</th>
+                        <th>الإجراء</th>
+                      </tr>
+                    </thead>
+                    <tbody id="invoiceRows"></tbody>
+                  </table>
+                </div>
+              </div>
+            </article>
+
+            <div class="stack">
+              <article class="panel">
+                <div class="panel-head"><div><h2 class="panel-title">توزيع الإيراد</h2><span class="panel-subtitle">حسب نوع الزيارة</span></div></div>
+                <div class="panel-body" id="revenueDonut"></div>
+              </article>
+              <article class="panel">
+                <div class="panel-head"><div><h2 class="panel-title">جودة التحصيل</h2><span class="panel-subtitle">مؤشرات تجريبية</span></div></div>
+                <div class="panel-body" id="collectionBars"></div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================ المخزون ============================ -->
+        <section class="view" data-view-pane="inventory" aria-label="المخزون" hidden>
+          <div class="page-head">
+            <div>
+              <span class="page-kicker">INVENTORY / CONSUMABLES</span>
+              <h1 class="page-title">مخزون المستهلكات</h1>
+              <p class="page-summary">متابعة الأرصدة ومعدل الاستهلاك الأسبوعي مع تقدير عدد الأيام المتبقية قبل النفاد.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary" type="button" id="restockBtn">محاكاة أمر شراء للناقص</button>
+            </div>
+          </div>
+
+          <div class="workspace-grid">
+            <article class="panel">
+              <div class="panel-head"><div><h2 class="panel-title">الأصناف</h2><span class="panel-subtitle">الشريط يوضح الرصيد مقارنة بحد إعادة الطلب</span></div></div>
+              <div class="panel-body flush">
+                <div class="table-shell">
+                  <table class="data-table" id="stockTable">
+                    <thead>
+                      <tr>
+                        <th class="sortable" data-sort-key="name">الصنف</th>
+                        <th class="sortable" data-sort-key="stock">الرصيد</th>
+                        <th>حد الطلب</th>
+                        <th>الاستهلاك الأسبوعي</th>
+                        <th class="sortable" data-sort-key="days">أيام متبقية</th>
+                        <th>الحالة</th>
+                      </tr>
+                    </thead>
+                    <tbody id="stockRows"></tbody>
+                  </table>
+                </div>
+              </div>
+            </article>
+
+            <div class="stack">
+              <article class="panel">
+                <div class="panel-head"><div><h2 class="panel-title">أصناف تحتاج طلبًا</h2><span class="panel-subtitle">أقل من حد إعادة الطلب</span></div></div>
+                <div class="panel-body"><div class="alert-feed" id="stockAlerts"></div></div>
+              </article>
+              <article class="panel panel-dark">
+                <div class="panel-head"><div><h2 class="panel-title">تكلفة إعادة التعبئة</h2><span class="panel-subtitle">تقدير تجريبي</span></div></div>
+                <div class="panel-body" id="restockCost"></div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================ المساعد الذكي ============================ -->
+        <section class="view" data-view-pane="smart" aria-label="المساعد الذكي" hidden>
+          <div class="page-head">
+            <div>
+              <span class="page-kicker">EXPLAINABLE ASSISTANT</span>
+              <h1 class="page-title">المساعد الذكي</h1>
+              <p class="page-summary">كل توقع مصحوب بالعوامل التي كوّنته ووزن كل عامل — والقرار النهائي دائمًا للموظف.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary" type="button" id="secureSlotBtn">راجع الإجراء المقترح</button>
+            </div>
+          </div>
+
+          <div class="workspace-grid">
+            <div class="stack">
+              <article class="panel">
+                <div class="panel-head">
+                  <div><h2 class="panel-title">أعلى موعد احتمالًا للغياب</h2><span class="panel-subtitle">تحليل عامل بعامل</span></div>
+                  <span class="risk" id="topRiskPill">—</span>
+                </div>
+                <div class="panel-body stack" id="riskExplainer"></div>
+              </article>
+
+              <article class="panel">
+                <div class="panel-head"><div><h2 class="panel-title">محاكي «ماذا لو»</h2><span class="panel-subtitle">غيّر السياسات وشوف الأثر التقديري على اليوم</span></div></div>
+                <div class="panel-body" id="whatIfPanel"></div>
+              </article>
+            </div>
+
+            <div class="stack">
+              <article class="panel">
+                <div class="panel-head">
+                  <div><h2 class="panel-title">قائمة الانتظار الذكية</h2><span class="panel-subtitle">مرشّحة حسب نوع الكشف والوقت</span></div>
+                  <span class="status status-info" id="waitlistCount">٠ مرشحين</span>
+                </div>
+                <div class="panel-body"><div class="insight-list" id="waitlistList"></div></div>
+              </article>
+
+              <article class="panel panel-dark">
+                <div class="panel-head"><div><h2 class="panel-title">إشارة ضغط اليوم</h2><span class="panel-subtitle">تُحدّث من جدول المواعيد الحالي</span></div></div>
+                <div class="panel-body" id="loadSignal"></div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================ التقارير ============================ -->
+        <section class="view" data-view-pane="reports" aria-label="التقارير" hidden>
+          <div class="page-head">
+            <div>
+              <span class="page-kicker">REPORTS / V2</span>
+              <h1 class="page-title">أثر التشغيل والمتابعة</h1>
+              <p class="page-summary">مؤشرات تجريبية قبل وبعد تطبيق النظام، واتجاه الأسبوع، وأداء كل طبيب.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn" type="button" id="printBtn2">طباعة التقرير</button>
+              <button class="btn btn-primary" type="button" id="sendReportBtn">معاينة تقرير ٩ مساءً</button>
+            </div>
+          </div>
+
+          <article class="panel">
+            <div class="panel-head">
+              <div><h2 class="panel-title">اتجاه الأسبوع</h2><span class="panel-subtitle">حجوزات مقابل حالات غياب — بيانات تجريبية</span></div>
+              <div class="chip-row" id="trendTabs" role="group" aria-label="مدى التقرير"></div>
+            </div>
+            <div class="panel-body" id="trendChart"></div>
+          </article>
+
+          <div class="workspace-grid">
+            <article class="panel">
+              <div class="panel-head"><div><h2 class="panel-title">أداء الأطباء</h2><span class="panel-subtitle">زيارات مكتملة مقابل مواعيد ضائعة</span></div></div>
+              <div class="panel-body" id="doctorChart"></div>
+            </article>
+
+            <div class="stack">
+              <article class="panel">
+                <div class="panel-head"><div><h2 class="panel-title">قبل / بعد النظام</h2><span class="panel-subtitle">مؤشرات تجريبية</span></div></div>
+                <div class="panel-body">
+                  <div class="bar-list">
+                    <div class="bar-row"><label>غياب قبل النظام</label><div class="bar-track is-bad"><span style="width:80%"></span></div><b>٢٤٪</b></div>
+                    <div class="bar-row"><label>غياب بعد التذكير</label><div class="bar-track is-good"><span style="width:30%"></span></div><b>٩٪</b></div>
+                    <div class="bar-row"><label>تأكيدات تلقائية</label><div class="bar-track"><span style="width:72%"></span></div><b>٧٢٪</b></div>
+                    <div class="bar-row"><label>إشغال قائمة الانتظار</label><div class="bar-track is-good"><span style="width:88%"></span></div><b>٨٨٪</b></div>
+                  </div>
+                </div>
+              </article>
+              <article class="panel">
+                <div class="panel-head"><div><h2 class="panel-title">ملخص اليوم</h2><span class="panel-subtitle">محسوب من البيانات الحالية</span></div></div>
+                <div class="panel-body" id="reportSummary"></div>
+              </article>
+            </div>
+          </div>
+        </section>
+
       </div>
     </main>
   </div>
@@ -173,15 +493,35 @@
         <button class="btn btn-primary" type="submit">افتح النظام</button>
       </form>
       <p class="field-hint demo-warning">للعرض فقط — لا تدخل بيانات مرضى حقيقية.</p>
-      <div class="gate-facts"><div class="gate-fact"><strong>V2 THEME</strong><span>نفس هوية الموقع الجديدة</span></div><div class="gate-fact"><strong>SMART SIGNALS</strong><span>توصيات قابلة للتفسير</span></div><div class="gate-fact"><strong>SAFE DEMO</strong><span>لا بيانات أو رسائل حقيقية</span></div></div>
+      <div class="gate-facts">
+        <div class="gate-fact"><strong>V2 THEME</strong><span>وضع فاتح وداكن</span></div>
+        <div class="gate-fact"><strong>SMART SIGNALS</strong><span>توصيات قابلة للتفسير</span></div>
+        <div class="gate-fact"><strong>SAFE DEMO</strong><span>لا بيانات أو رسائل حقيقية</span></div>
+      </div>
     </section>
   </div>
 
   <dialog id="demoDialog" aria-labelledby="dialogTitle">
-    <div class="dialog-head"><div><span class="dialog-kicker" data-dialog-kicker></span><h2 class="dialog-title" id="dialogTitle" data-dialog-title></h2></div><button class="dialog-close" type="button" data-dialog-close aria-label="إغلاق النافذة">×</button></div>
+    <div class="dialog-head">
+      <div><span class="dialog-kicker" data-dialog-kicker></span><h2 class="dialog-title" id="dialogTitle" data-dialog-title></h2></div>
+      <button class="dialog-close" type="button" data-dialog-close aria-label="إغلاق النافذة">×</button>
+    </div>
     <div class="dialog-body" data-dialog-body></div>
     <div class="dialog-actions" data-dialog-actions></div>
   </dialog>
+
+  <div class="drawer" id="demoDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" hidden>
+    <button class="drawer-scrim" type="button" aria-label="إغلاق اللوحة الجانبية"></button>
+    <section class="drawer-panel">
+      <div class="drawer-head">
+        <div><span class="dialog-kicker" data-drawer-kicker></span><h2 class="dialog-title" id="drawerTitle" data-drawer-title></h2></div>
+        <button class="dialog-close" type="button" data-drawer-close aria-label="إغلاق اللوحة الجانبية">×</button>
+      </div>
+      <div class="drawer-body" data-drawer-body></div>
+      <div class="drawer-foot" data-drawer-foot></div>
+    </section>
+  </div>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <div class="sr-only" id="liveStatus" aria-live="polite"></div>
 
@@ -189,245 +529,1655 @@
   <script>
   (function () {
     'use strict';
+
     var E = window.EngazV2;
-    var prices = { 'كشف': 300, 'متابعة': 150, 'استشارة': 350 };
-    var originalAppointments = [
-      { id: 1, time: '٤:٠٠', name: 'مريض تجريبي ١', phone: 'TEST-001', type: 'كشف', status: 'completed', noShows: 0, wait: 5, confirmed: true },
-      { id: 2, time: '٤:٣٠', name: 'مريض تجريبي ٢', phone: 'TEST-002', type: 'متابعة', status: 'waiting', noShows: 0, wait: 11, confirmed: true },
-      { id: 3, time: '٥:٠٠', name: 'مريض تجريبي ٣', phone: 'TEST-003', type: 'كشف', status: 'upcoming', noShows: 2, wait: 0, confirmed: false },
-      { id: 4, time: '٥:٣٠', name: 'مريض تجريبي ٤', phone: 'TEST-004', type: 'استشارة', status: 'upcoming', noShows: 0, wait: 0, confirmed: true },
-      { id: 5, time: '٦:٠٠', name: 'مريض تجريبي ٥', phone: 'TEST-005', type: 'متابعة', status: 'upcoming', noShows: 1, wait: 0, confirmed: false },
-      { id: 6, time: '٦:٣٠', name: 'مريض تجريبي ٦', phone: 'TEST-006', type: 'كشف', status: 'upcoming', noShows: 0, wait: 0, confirmed: true }
+
+    /* ====================================================================
+       Reference data — entirely synthetic
+       ==================================================================== */
+    var PRICES = { 'كشف': 300, 'متابعة': 150, 'استشارة': 350, 'إجراء صغير': 600 };
+    var SLOTS = ['٤:٠٠', '٤:٣٠', '٥:٠٠', '٥:٣٠', '٦:٠٠', '٦:٣٠', '٧:٠٠', '٧:٣٠', '٨:٠٠', '٨:٣٠'];
+    var DAY_LABELS = ['السبت', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+    var WEEK_LABELS = ['أسبوع ١', 'أسبوع ٢', 'أسبوع ٣', 'أسبوع ٤'];
+
+    var DOCTORS = [
+      { id: 'd1', name: 'طبيب تجريبي أ', specialty: 'باطنة', room: 'غرفة ١', color: '#1aa5b4' },
+      { id: 'd2', name: 'طبيب تجريبي ب', specialty: 'أطفال', room: 'غرفة ٢', color: '#7a63d4' },
+      { id: 'd3', name: 'طبيب تجريبي ج', specialty: 'جلدية', room: 'غرفة ٣', color: '#4d7fd6' }
     ];
-    var originalWaitlist = [
-      { id: 101, name: 'مرشح تجريبي ١', phone: 'TEST-W101', type: 'كشف', window: 'من ٥ إلى ٧' },
-      { id: 102, name: 'مرشح تجريبي ٢', phone: 'TEST-W102', type: 'متابعة', window: 'بعد ٦ مساءً' },
-      { id: 103, name: 'مرشح تجريبي ٣', phone: 'TEST-W103', type: 'كشف', window: 'أي وقت اليوم' }
+
+    var BASE_PATIENTS = [
+      { id: 'p1', code: 'TEST-P01', name: 'مريض تجريبي ١', age: 34, visits: 6, lastVisit: 21, noShows: 0, adherence: 92, balance: 0, tags: ['متابعة منتظمة'] },
+      { id: 'p2', code: 'TEST-P02', name: 'مريض تجريبي ٢', age: 28, visits: 3, lastVisit: 40, noShows: 0, adherence: 84, balance: 150, tags: ['حساسية دواء'] },
+      { id: 'p3', code: 'TEST-P03', name: 'مريض تجريبي ٣', age: 51, visits: 9, lastVisit: 12, noShows: 2, adherence: 46, balance: 300, tags: ['ضغط', 'يحتاج تذكيرًا مبكرًا'] },
+      { id: 'p4', code: 'TEST-P04', name: 'مريض تجريبي ٤', age: 45, visits: 2, lastVisit: 95, noShows: 0, adherence: 78, balance: 0, tags: ['استشارة أولى'] },
+      { id: 'p5', code: 'TEST-P05', name: 'مريض تجريبي ٥', age: 62, visits: 14, lastVisit: 8, noShows: 1, adherence: 61, balance: 450, tags: ['سكري', 'متابعة شهرية'] },
+      { id: 'p6', code: 'TEST-P06', name: 'مريض تجريبي ٦', age: 19, visits: 1, lastVisit: 3, noShows: 0, adherence: 88, balance: 0, tags: ['ملف جديد'] },
+      { id: 'p7', code: 'TEST-P07', name: 'مريض تجريبي ٧', age: 37, visits: 5, lastVisit: 30, noShows: 1, adherence: 69, balance: 0, tags: ['متابعة'] },
+      { id: 'p8', code: 'TEST-P08', name: 'مريض تجريبي ٨', age: 8, visits: 4, lastVisit: 16, noShows: 0, adherence: 90, balance: 0, tags: ['أطفال'] },
+      { id: 'p9', code: 'TEST-P09', name: 'مريض تجريبي ٩', age: 55, visits: 11, lastVisit: 60, noShows: 3, adherence: 38, balance: 700, tags: ['متأخر في السداد'] },
+      { id: 'p10', code: 'TEST-P10', name: 'مريض تجريبي ١٠', age: 41, visits: 0, lastVisit: null, noShows: 0, adherence: 75, balance: 0, tags: ['ملف جديد'] }
     ];
-    var appointments = clone(originalAppointments);
-    var waitlist = clone(originalWaitlist);
-    var filter = 'all';
+
+    var BASE_APPOINTMENTS = [
+      { id: 1, slot: 0, patientId: 'p1', doctorId: 'd1', type: 'متابعة', status: 'completed', wait: 4, confirmed: true, leadDays: 5 },
+      { id: 2, slot: 1, patientId: 'p8', doctorId: 'd2', type: 'كشف', status: 'completed', wait: 9, confirmed: true, leadDays: 3 },
+      { id: 3, slot: 2, patientId: 'p5', doctorId: 'd1', type: 'متابعة', status: 'waiting', wait: 13, confirmed: true, leadDays: 9 },
+      { id: 4, slot: 3, patientId: 'p3', doctorId: 'd3', type: 'كشف', status: 'upcoming', wait: 0, confirmed: false, leadDays: 18 },
+      { id: 5, slot: 4, patientId: 'p4', doctorId: 'd1', type: 'استشارة', status: 'upcoming', wait: 0, confirmed: true, leadDays: 2 },
+      { id: 6, slot: 5, patientId: 'p9', doctorId: 'd2', type: 'متابعة', status: 'upcoming', wait: 0, confirmed: false, leadDays: 21 },
+      { id: 7, slot: 6, patientId: 'p2', doctorId: 'd3', type: 'كشف', status: 'upcoming', wait: 0, confirmed: true, leadDays: 6 },
+      { id: 8, slot: 7, patientId: 'p7', doctorId: 'd1', type: 'إجراء صغير', status: 'upcoming', wait: 0, confirmed: false, leadDays: 11 },
+      { id: 9, slot: 9, patientId: 'p6', doctorId: 'd2', type: 'كشف', status: 'upcoming', wait: 0, confirmed: true, leadDays: 1 }
+    ];
+
+    var BASE_WAITLIST = [
+      { id: 101, name: 'مرشح تجريبي ١', phone: 'TEST-W101', type: 'كشف', window: 'من ٥ إلى ٧', priority: 'عالية' },
+      { id: 102, name: 'مرشح تجريبي ٢', phone: 'TEST-W102', type: 'متابعة', window: 'بعد ٦ مساءً', priority: 'متوسطة' },
+      { id: 103, name: 'مرشح تجريبي ٣', phone: 'TEST-W103', type: 'كشف', window: 'أي وقت اليوم', priority: 'عالية' },
+      { id: 104, name: 'مرشح تجريبي ٤', phone: 'TEST-W104', type: 'استشارة', window: 'من ٧ إلى ٩', priority: 'منخفضة' }
+    ];
+
+    var BASE_INVOICES = [
+      { id: 'INV-2101', patientId: 'p1', service: 'متابعة', amount: 150, ageDays: 0, status: 'paid' },
+      { id: 'INV-2102', patientId: 'p8', service: 'كشف', amount: 300, ageDays: 0, status: 'paid' },
+      { id: 'INV-2103', patientId: 'p2', service: 'كشف', amount: 300, ageDays: 6, status: 'pending' },
+      { id: 'INV-2104', patientId: 'p5', service: 'إجراء صغير', amount: 600, ageDays: 14, status: 'pending' },
+      { id: 'INV-2105', patientId: 'p3', service: 'كشف', amount: 300, ageDays: 34, status: 'overdue' },
+      { id: 'INV-2106', patientId: 'p9', service: 'استشارة', amount: 350, ageDays: 52, status: 'overdue' },
+      { id: 'INV-2107', patientId: 'p9', service: 'متابعة', amount: 350, ageDays: 41, status: 'overdue' },
+      { id: 'INV-2108', patientId: 'p7', service: 'متابعة', amount: 150, ageDays: 2, status: 'paid' }
+    ];
+
+    var BASE_STOCK = [
+      { id: 's1', name: 'قفازات فحص', unit: 'علبة', stock: 26, min: 12, perWeek: 9, cost: 90 },
+      { id: 's2', name: 'كمامات جراحية', unit: 'علبة', stock: 7, min: 10, perWeek: 6, cost: 75 },
+      { id: 's3', name: 'محاليل تعقيم', unit: 'لتر', stock: 4, min: 6, perWeek: 3, cost: 140 },
+      { id: 's4', name: 'سرنجات', unit: 'علبة', stock: 18, min: 8, perWeek: 5, cost: 60 },
+      { id: 's5', name: 'شاش طبي', unit: 'رول', stock: 3, min: 8, perWeek: 4, cost: 45 },
+      { id: 's6', name: 'ورق كشف', unit: 'رول', stock: 11, min: 5, perWeek: 2, cost: 35 }
+    ];
+
+    var TRENDS = {
+      week: {
+        labels: DAY_LABELS,
+        bookings: [18, 22, 20, 25, 27, 24, 12],
+        noShows: [4, 3, 3, 2, 2, 2, 1]
+      },
+      month: {
+        labels: WEEK_LABELS,
+        bookings: [112, 128, 121, 148],
+        noShows: [24, 17, 13, 11]
+      }
+    };
+
+    /* ====================================================================
+       Mutable demo state
+       ==================================================================== */
+    var state = {
+      patients: clone(BASE_PATIENTS),
+      appointments: clone(BASE_APPOINTMENTS),
+      waitlist: clone(BASE_WAITLIST),
+      invoices: clone(BASE_INVOICES),
+      stock: clone(BASE_STOCK),
+      apptFilter: 'all',
+      apptSearch: '',
+      apptDoctor: 'all',
+      apptSort: { key: 'slot', direction: 'asc' },
+      patientFilter: 'all',
+      patientSearch: '',
+      patientSort: { key: 'name', direction: 'asc' },
+      billingFilter: 'all',
+      billingSort: { key: 'age', direction: 'desc' },
+      stockSort: { key: 'days', direction: 'asc' },
+      selection: [],
+      trendRange: 'week',
+      whatIf: { reminder: 24, deposit: 0, overbook: 0 },
+      nextId: 900
+    };
 
     function clone(value) { return JSON.parse(JSON.stringify(value)); }
-    function clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
-    function riskScore(item) {
-      var score = 12 + item.noShows * 29 + (item.confirmed ? -9 : 22) + (item.time.indexOf('٦') === 0 ? 6 : 0);
-      return clamp(score, 5, 94);
+    function nextId() { state.nextId += 1; return state.nextId; }
+
+    function patientOf(appointment) {
+      return state.patients.find(function (item) { return item.id === appointment.patientId; }) ||
+        { id: '?', code: '—', name: 'غير معروف', age: 0, visits: 0, noShows: 0, adherence: 70, balance: 0, tags: [] };
     }
-    function riskLevel(score) { return score >= 65 ? 'high' : score >= 35 ? 'medium' : 'low'; }
-    function riskText(score) { return score >= 65 ? 'مرتفع' : score >= 35 ? 'متوسط' : 'منخفض'; }
-    function statusText(status) { return { completed: 'تم الكشف', waiting: 'في الانتظار', upcoming: 'قادم', secured: 'تم التأكيد' }[status] || 'قادم'; }
-    function statusClass(status) { return status === 'completed' ? 'status-good' : status === 'waiting' ? 'status-warn' : status === 'secured' ? 'status-info' : 'status-muted'; }
+    function doctorOf(appointment) {
+      return DOCTORS.find(function (item) { return item.id === appointment.doctorId; }) || DOCTORS[0];
+    }
+    function slotLabel(index) { return SLOTS[index] || SLOTS[SLOTS.length - 1]; }
+
+    /* ====================================================================
+       Explainable no-show engine
+       ==================================================================== */
+    function riskBreakdown(appointment) {
+      var patient = patientOf(appointment);
+      var factors = [{ label: 'خط الأساس للعيادة', note: 'متوسط الغياب التاريخي', delta: 12 }];
+
+      var repeated = Math.min(3, patient.noShows) * 12;
+      if (repeated) factors.push({ label: 'سجل غياب سابق', note: E.arNumber(patient.noShows) + ' مرة في البيانات التجريبية', delta: repeated });
+
+      factors.push(appointment.confirmed
+        ? { label: 'الموعد مؤكد', note: 'وصل رد تأكيد تجريبي', delta: -11 }
+        : { label: 'لا يوجد تأكيد', note: 'لم يصل رد على التذكير بعد', delta: 19 });
+
+      var adherenceDelta = Math.round((74 - patient.adherence) * 0.32);
+      if (adherenceDelta !== 0) {
+        factors.push({
+          label: adherenceDelta > 0 ? 'التزام منخفض بالمواعيد' : 'التزام مرتفع بالمواعيد',
+          note: 'مؤشر الالتزام ' + E.pct(patient.adherence),
+          delta: adherenceDelta
+        });
+      }
+
+      if (appointment.slot >= 6) factors.push({ label: 'موعد متأخر', note: 'بعد الساعة السابعة مساءً', delta: 7 });
+      if (patient.visits === 0) factors.push({ label: 'زيارة أولى', note: 'لا يوجد تاريخ سابق للمريض', delta: 8 });
+      if (patient.balance > 0) factors.push({ label: 'رصيد غير مسدد', note: E.money(patient.balance), delta: 5 });
+      if (appointment.leadDays > 14) factors.push({ label: 'حجز مبكر جدًا', note: 'تم الحجز قبل ' + E.arNumber(appointment.leadDays) + ' يومًا', delta: 6 });
+
+      var raw = factors.reduce(function (sum, item) { return sum + item.delta; }, 0);
+      return { score: Math.round(E.clamp(raw, 4, 95)), factors: factors };
+    }
+
+    function riskScore(appointment) {
+      if (appointment.status === 'completed') return 0;
+      return riskBreakdown(appointment).score;
+    }
+    function riskLevel(score) { return score >= 60 ? 'high' : score >= 33 ? 'medium' : 'low'; }
+    function riskText(score) { return score >= 60 ? 'مرتفع' : score >= 33 ? 'متوسط' : 'منخفض'; }
+
+    function statusText(status) {
+      return { completed: 'تم الكشف', waiting: 'في الانتظار', upcoming: 'قادم', secured: 'مؤكد', missed: 'لم يحضر' }[status] || 'قادم';
+    }
+    function statusClass(status) {
+      return {
+        completed: 'status-good',
+        waiting: 'status-warn',
+        secured: 'status-info',
+        missed: 'status-bad',
+        upcoming: 'status-muted'
+      }[status] || 'status-muted';
+    }
+
+    function activeAppointments() {
+      return state.appointments.filter(function (item) { return item.status !== 'completed' && item.status !== 'missed'; });
+    }
+    function riskyAppointments() {
+      return activeAppointments().filter(function (item) { return riskScore(item) >= 33; });
+    }
+    function topRisk() {
+      return activeAppointments().sort(function (a, b) { return riskScore(b) - riskScore(a); })[0] || null;
+    }
+    function averageWait() {
+      var waiting = state.appointments.filter(function (item) { return item.status === 'waiting'; });
+      if (!waiting.length) return 0;
+      return Math.round(waiting.reduce(function (sum, item) { return sum + item.wait; }, 0) / waiting.length);
+    }
+    function collectedToday() {
+      return state.invoices.filter(function (item) { return item.status === 'paid'; })
+        .reduce(function (sum, item) { return sum + item.amount; }, 0);
+    }
+    function outstanding() {
+      return state.invoices.filter(function (item) { return item.status !== 'paid'; })
+        .reduce(function (sum, item) { return sum + item.amount; }, 0);
+    }
+    function lowStock() {
+      return state.stock.filter(function (item) { return item.stock < item.min; });
+    }
+    function daysLeft(item) {
+      return Math.round((item.stock / Math.max(0.5, item.perWeek)) * 7);
+    }
+
+    /* ====================================================================
+       Render: overview
+       ==================================================================== */
+    function renderOverview() {
+      var active = activeAppointments();
+      var risky = riskyAppointments();
+      var wait = averageWait();
+      var readiness = Math.round(E.clamp(100 - risky.length * 7 - Math.max(0, wait - 10) * 1.4 - lowStock().length * 2, 45, 99));
+
+      var gaugeHost = E.clear(E.q('#readinessGauge'));
+      gaugeHost.append(E.gauge(readiness, 'جاهزية اليوم'));
+      E.q('#clinicScoreNote').textContent = risky.length
+        ? E.arNumber(risky.length) + ' موعد يحتاج تأكيدًا مبكرًا'
+        : 'كل مواعيد اليوم مؤكدة';
+
+      var completed = state.appointments.filter(function (item) { return item.status === 'completed'; });
+      var kpis = [
+        {
+          label: 'حجوزات اليوم',
+          value: E.arNumber(state.appointments.length),
+          meta: E.arNumber(active.length) + ' موعد متبقٍّ',
+          trend: 'trend-up',
+          spark: [14, 17, 16, 21, 19, 23, state.appointments.length + 15],
+          color: '#1aa5b4'
+        },
+        {
+          label: 'مواعيد معرضة للغياب',
+          value: E.arNumber(risky.length),
+          meta: 'تحتاج متابعة بشرية',
+          trend: risky.length ? 'trend-warn' : 'trend-up',
+          spark: [6, 5, 5, 4, 4, 3, Math.max(1, risky.length)],
+          color: '#d9922b'
+        },
+        {
+          label: 'متوسط الانتظار',
+          value: E.arNumber(wait) + ' د',
+          meta: wait <= 15 ? 'أقل من حد ١٥ دقيقة' : 'أعلى من الحد المستهدف',
+          trend: wait <= 15 ? 'trend-up' : 'trend-down',
+          spark: [21, 19, 17, 16, 14, 13, Math.max(1, wait)],
+          color: '#2f9e6d'
+        },
+        {
+          label: 'محصّل اليوم',
+          value: E.money(collectedToday()),
+          meta: E.arNumber(completed.length) + ' زيارة مكتملة',
+          trend: 'trend-up',
+          spark: [1200, 1450, 1380, 1600, 1720, 1810, Math.max(200, collectedToday())],
+          color: '#1aa5b4'
+        },
+        {
+          label: 'مستحقات معلّقة',
+          value: E.money(outstanding()),
+          meta: E.arNumber(state.invoices.filter(function (i) { return i.status === 'overdue'; }).length) + ' فاتورة متأخرة',
+          trend: outstanding() > 800 ? 'trend-down' : 'trend-up',
+          spark: [2600, 2400, 2300, 2100, 1900, 1750, Math.max(100, outstanding())],
+          color: '#d15757'
+        },
+        {
+          label: 'أصناف تحت الحد',
+          value: E.arNumber(lowStock().length),
+          meta: lowStock().length ? 'اطلب قبل النفاد' : 'المخزون كافٍ',
+          trend: lowStock().length ? 'trend-warn' : 'trend-up',
+          spark: [1, 2, 2, 3, 3, 3, Math.max(1, lowStock().length)],
+          color: '#7a63d4'
+        }
+      ];
+
+      var grid = E.clear(E.q('#kpiGrid'));
+      kpis.forEach(function (kpi) {
+        grid.append(E.el('article', {
+          className: 'kpi',
+          children: [
+            E.el('span', { className: 'kpi-label', text: kpi.label }),
+            E.el('strong', { className: 'kpi-value', text: kpi.value }),
+            E.el('span', { className: 'kpi-meta ' + kpi.trend, text: kpi.meta }),
+            E.sparkline(kpi.spark, kpi.color)
+          ]
+        }));
+      });
+
+      renderTimeline();
+      renderAlerts();
+    }
+
+    function renderTimeline() {
+      var host = E.clear(E.q('#dayTimeline'));
+      SLOTS.forEach(function (time, index) {
+        var appointment = state.appointments.find(function (item) { return item.slot === index; });
+        if (!appointment) {
+          host.append(E.el('div', {
+            className: 'tl-slot is-free',
+            children: [
+              E.el('span', { className: 'tl-time', text: time }),
+              E.el('span', { className: 'tl-name', text: 'خانة متاحة' }),
+              E.el('span', { className: 'tl-meta', text: 'يمكن ملؤها من الانتظار' })
+            ]
+          }));
+          return;
+        }
+        var score = riskScore(appointment);
+        var doctor = doctorOf(appointment);
+        var bar = E.el('div', { className: 'tl-bar' });
+        bar.append(E.el('span', {
+          style: {
+            width: Math.max(6, score) + '%',
+            background: score >= 60 ? 'var(--bad)' : score >= 33 ? 'var(--warn)' : 'var(--good)'
+          }
+        }));
+        var slot = E.el('button', {
+          className: 'tl-slot',
+          type: 'button',
+          attrs: { 'aria-label': 'مراجعة موعد ' + patientOf(appointment).name },
+          children: [
+            E.el('span', { className: 'tl-time', text: time }),
+            E.el('span', { className: 'tl-name', text: patientOf(appointment).name }),
+            E.el('span', { className: 'tl-meta', text: appointment.type + ' · ' + doctor.room }),
+            bar
+          ]
+        });
+        slot.addEventListener('click', function () { openAppointment(appointment); });
+        host.append(slot);
+      });
+    }
+
+    function alertRow(kind, iconName, title, text, when) {
+      return E.el('div', {
+        className: 'alert is-' + kind,
+        children: [
+          E.el('span', { className: 'alert-icon', children: [E.icon(iconName)] }),
+          E.el('div', {
+            children: [
+              E.el('strong', { text: title }),
+              E.el('p', { text: text }),
+              when ? E.el('time', { text: when }) : null
+            ]
+          })
+        ]
+      });
+    }
+
+    function renderAlerts() {
+      var host = E.clear(E.q('#alertFeed'));
+      var rows = [];
+      var risky = riskyAppointments();
+      if (risky.length) {
+        var worst = topRisk();
+        rows.push(alertRow('bad', 'alert', 'موعد معرّض للغياب',
+          patientOf(worst).name + ' الساعة ' + slotLabel(worst.slot) + ' باحتمال ' + E.pct(riskScore(worst)) + '.', 'الآن'));
+      }
+      var overdue = state.invoices.filter(function (item) { return item.status === 'overdue'; });
+      if (overdue.length) {
+        rows.push(alertRow('warn', 'wallet', 'فواتير متأخرة',
+          E.arNumber(overdue.length) + ' فاتورة بقيمة ' + E.money(overdue.reduce(function (s, i) { return s + i.amount; }, 0)) + ' تجاوزت ٣٠ يومًا.', 'اليوم'));
+      }
+      var short = lowStock();
+      if (short.length) {
+        rows.push(alertRow('warn', 'box', 'مخزون تحت الحد',
+          short.map(function (item) { return item.name; }).join('، ') + ' — يُقترح طلب تعبئة.', 'اليوم'));
+      }
+      if (averageWait() > 12) {
+        rows.push(alertRow('info', 'clock', 'الانتظار فوق المستهدف',
+          'متوسط الانتظار ' + E.arNumber(averageWait()) + ' دقيقة. اقترح فتح خانة مرنة.', 'الآن'));
+      }
+      if (state.waitlist.length) {
+        rows.push(alertRow('info', 'users', 'قائمة انتظار جاهزة',
+          E.arNumber(state.waitlist.length) + ' مرشح يمكن استدعاؤهم فور أي إلغاء.', 'محدّث'));
+      }
+      if (!rows.length) rows.push(alertRow('good', 'check', 'اليوم مستقر', 'لا توجد تنبيهات تحتاج قرارًا الآن.', 'الآن'));
+      rows.forEach(function (row) { host.append(row); });
+    }
+
+    /* ====================================================================
+       Render: appointments
+       ==================================================================== */
+    function visibleAppointments() {
+      var search = state.apptSearch.trim();
+      var list = state.appointments.filter(function (item) {
+        var patient = patientOf(item);
+        if (state.apptDoctor !== 'all' && item.doctorId !== state.apptDoctor) return false;
+        if (search && patient.name.indexOf(search) === -1 && patient.code.toLowerCase().indexOf(search.toLowerCase()) === -1) return false;
+        if (state.apptFilter === 'risk') return riskScore(item) >= 33 && item.status !== 'completed';
+        if (state.apptFilter === 'waiting') return item.status === 'waiting';
+        if (state.apptFilter === 'unconfirmed') return !item.confirmed && item.status !== 'completed';
+        if (state.apptFilter === 'completed') return item.status === 'completed';
+        return true;
+      });
+
+      var key = state.apptSort.key;
+      var accessor = key === 'name' ? function (item) { return patientOf(item).name; }
+        : key === 'risk' ? function (item) { return riskScore(item); }
+          : key === 'status' ? function (item) { return statusText(item.status); }
+            : function (item) { return item.slot; };
+      return E.sortBy(list, accessor, state.apptSort.direction);
+    }
 
     function renderAppointments() {
-      var rows = E.q('#appointmentRows');
-      E.clear(rows);
-      appointments.filter(function (item) {
-        if (filter === 'risk') return riskScore(item) >= 35 && item.status !== 'completed';
-        if (filter === 'waiting') return item.status === 'waiting';
-        return true;
-      }).forEach(function (item) {
-        var score = riskScore(item);
-        var tr = E.el('tr');
-        var nameCell = E.el('td');
-        nameCell.append(E.el('span', { className: 'cell-main', text: item.name }), E.el('span', { className: 'cell-sub', text: item.phone }));
-        var status = E.el('span', { className: 'status ' + statusClass(item.status), text: statusText(item.status) });
-        var risk = E.el('span', { className: 'risk risk-' + riskLevel(score), text: riskText(score) + ' · ' + E.arNumber(score) + '٪' });
-        var action = E.el('button', { className: 'row-action', text: item.status === 'completed' ? 'متابعة لاحقة' : 'راجع', type: 'button', dataset: { appointmentId: item.id } });
-        tr.append(E.el('td', { text: item.time }), nameCell, E.el('td', { text: item.type }), E.el('td', { children: [status] }), E.el('td', { children: [risk] }), E.el('td', { children: [action] }));
+      var rows = E.clear(E.q('#appointmentRows'));
+      var list = visibleAppointments();
+      E.q('#apptResultCount').textContent = E.arNumber(list.length) + ' نتيجة';
+      E.q('[data-count="appointments"]').textContent = E.arNumber(activeAppointments().length);
+
+      if (!list.length) {
+        rows.append(E.el('tr', {
+          children: [E.el('td', { attrs: { colspan: '8' }, children: [E.el('p', { className: 'empty-state', text: 'لا توجد مواعيد مطابقة للبحث الحالي.' })] })]
+        }));
+      }
+
+      list.forEach(function (appointment) {
+        var patient = patientOf(appointment);
+        var doctor = doctorOf(appointment);
+        var score = riskScore(appointment);
+        var selected = state.selection.indexOf(appointment.id) >= 0;
+
+        var check = E.el('input', {
+          className: 'row-check',
+          type: 'checkbox',
+          checked: selected,
+          ariaLabel: 'تحديد موعد ' + patient.name
+        });
+        check.addEventListener('change', function () { toggleSelection(appointment.id, check.checked); });
+
+        var person = E.el('div', {
+          className: 'cell-person',
+          children: [
+            E.el('span', { className: 'avatar', text: E.initials(patient.name) }),
+            E.el('div', {
+              children: [
+                E.el('span', { className: 'cell-main', text: patient.name }),
+                E.el('span', { className: 'cell-sub', text: patient.code })
+              ]
+            })
+          ]
+        });
+
+        var riskCell = appointment.status === 'completed'
+          ? E.el('span', { className: 'pill', text: '—' })
+          : E.el('span', { className: 'risk risk-' + riskLevel(score), text: riskText(score) + ' · ' + E.pct(score) });
+
+        var action = E.el('button', {
+          className: 'row-action',
+          type: 'button',
+          text: appointment.status === 'completed' ? 'متابعة لاحقة' : 'راجع'
+        });
+        action.addEventListener('click', function () { openAppointment(appointment); });
+
+        var tr = E.el('tr', {
+          className: selected ? 'is-selected' : '',
+          children: [
+            E.el('td', { children: [check] }),
+            E.el('td', { className: 'cell-num', text: slotLabel(appointment.slot) }),
+            E.el('td', { children: [person] }),
+            E.el('td', {
+              children: [E.el('span', {
+                className: 'pill',
+                style: { background: doctor.color + '22', color: doctor.color },
+                text: doctor.name
+              })]
+            }),
+            E.el('td', { text: appointment.type }),
+            E.el('td', { children: [E.el('span', { className: 'status ' + statusClass(appointment.status), text: statusText(appointment.status) })] }),
+            E.el('td', { children: [riskCell] }),
+            E.el('td', { children: [action] })
+          ]
+        });
         rows.append(tr);
       });
-      renderMetrics();
-      renderSmartSignal();
+
+      renderBulkBar();
+    }
+
+    function toggleSelection(id, on) {
+      var index = state.selection.indexOf(id);
+      if (on && index === -1) state.selection.push(id);
+      if (!on && index >= 0) state.selection.splice(index, 1);
+      renderAppointments();
+    }
+
+    function renderBulkBar() {
+      var bar = E.q('#bulkBar');
+      bar.hidden = !state.selection.length;
+      E.q('#bulkCount').textContent = E.arNumber(state.selection.length) + ' موعد محدد';
+      var all = E.q('#selectAll');
+      var visible = visibleAppointments();
+      all.checked = visible.length > 0 && visible.every(function (item) { return state.selection.indexOf(item.id) >= 0; });
+    }
+
+    function selectedAppointments() {
+      return state.appointments.filter(function (item) { return state.selection.indexOf(item.id) >= 0; });
+    }
+
+    /* ====================================================================
+       Render: patients
+       ==================================================================== */
+    function visiblePatients() {
+      var search = state.patientSearch.trim().toLowerCase();
+      var list = state.patients.filter(function (patient) {
+        if (search && patient.name.toLowerCase().indexOf(search) === -1 && patient.code.toLowerCase().indexOf(search) === -1) return false;
+        if (state.patientFilter === 'risk') return patient.adherence < 65;
+        if (state.patientFilter === 'debt') return patient.balance > 0;
+        if (state.patientFilter === 'new') return patient.visits <= 1;
+        return true;
+      });
+      return E.sortBy(list, state.patientSort.key, state.patientSort.direction);
+    }
+
+    function renderPatients() {
+      var rows = E.clear(E.q('#patientRows'));
+      var list = visiblePatients();
+      E.q('#patientResultCount').textContent = E.arNumber(list.length) + ' ملف';
+
+      if (!list.length) {
+        rows.append(E.el('tr', {
+          children: [E.el('td', { attrs: { colspan: '8' }, children: [E.el('p', { className: 'empty-state', text: 'لا توجد ملفات مطابقة.' })] })]
+        }));
+      }
+
+      list.forEach(function (patient) {
+        var adherenceClass = patient.adherence >= 80 ? 'status-good' : patient.adherence >= 60 ? 'status-warn' : 'status-bad';
+        var open = E.el('button', { className: 'row-action', type: 'button', text: 'افتح الملف' });
+        open.addEventListener('click', function () { openPatient(patient); });
+
+        rows.append(E.el('tr', {
+          children: [
+            E.el('td', {
+              children: [E.el('div', {
+                className: 'cell-person',
+                children: [
+                  E.el('span', { className: 'avatar', text: E.initials(patient.name) }),
+                  E.el('div', {
+                    children: [
+                      E.el('span', { className: 'cell-main', text: patient.name }),
+                      E.el('span', { className: 'cell-sub', text: patient.code })
+                    ]
+                  })
+                ]
+              })]
+            }),
+            E.el('td', { className: 'cell-num', text: E.arNumber(patient.age) }),
+            E.el('td', { className: 'cell-num', text: E.arNumber(patient.visits) }),
+            E.el('td', { text: patient.lastVisit == null ? 'لا يوجد' : 'منذ ' + E.arNumber(patient.lastVisit) + ' يومًا' }),
+            E.el('td', { children: [E.el('span', { className: 'status ' + adherenceClass, text: E.pct(patient.adherence) })] }),
+            E.el('td', {
+              className: 'cell-num',
+              children: [E.el('span', {
+                className: patient.balance > 0 ? 'status status-bad' : 'pill',
+                text: patient.balance > 0 ? E.money(patient.balance) : 'مسدد'
+              })]
+            }),
+            E.el('td', { text: patient.tags.slice(0, 2).join('، ') || '—' }),
+            E.el('td', { children: [open] })
+          ]
+        }));
+      });
+    }
+
+    function patientHistory(patient) {
+      var invoices = state.invoices.filter(function (item) { return item.patientId === patient.id; });
+      var appointments = state.appointments.filter(function (item) { return item.patientId === patient.id; });
+      return { invoices: invoices, appointments: appointments };
+    }
+
+    function openPatient(patient) {
+      var history = patientHistory(patient);
+      var tagRow = E.el('div', { className: 'chip-row' });
+      patient.tags.forEach(function (tag) { tagRow.append(E.el('span', { className: 'pill', text: tag })); });
+      if (!patient.tags.length) tagRow.append(E.el('span', { className: 'pill', text: 'لا توجد وسوم' }));
+
+      var visitList = E.el('div', { className: 'insight-list' });
+      if (!history.appointments.length) {
+        visitList.append(E.el('p', { className: 'empty-state', text: 'لا توجد مواعيد اليوم لهذا الملف.' }));
+      }
+      history.appointments.forEach(function (appointment, index) {
+        visitList.append(E.el('div', {
+          className: 'insight',
+          children: [
+            E.el('span', { className: 'insight-num', text: '٠' + E.arNumber(index + 1) }),
+            E.el('div', {
+              children: [
+                E.el('strong', { text: appointment.type + ' · ' + slotLabel(appointment.slot) }),
+                E.el('p', { text: doctorOf(appointment).name + ' — ' + statusText(appointment.status) })
+              ]
+            })
+          ]
+        }));
+      });
+
+      var invoiceList = E.el('div', { className: 'kv-list' });
+      if (!history.invoices.length) invoiceList.append(E.el('p', { className: 'empty-state', text: 'لا توجد فواتير.' }));
+      history.invoices.forEach(function (invoice) {
+        invoiceList.append(E.el('div', {
+          className: 'kv',
+          children: [
+            E.el('span', { text: invoice.id + ' · ' + invoice.service }),
+            E.el('b', { text: E.money(invoice.amount) + ' — ' + invoiceStatusText(invoice.status) })
+          ]
+        }));
+      });
+
+      E.openDrawer({
+        kicker: 'PATIENT FILE',
+        title: patient.name,
+        sections: [
+          E.el('div', {
+            className: 'cell-person',
+            children: [
+              E.el('span', { className: 'avatar avatar-lg', text: E.initials(patient.name) }),
+              E.el('div', {
+                children: [
+                  E.el('span', { className: 'cell-main', text: patient.code }),
+                  E.el('span', { className: 'cell-sub', text: E.arNumber(patient.age) + ' سنة' })
+                ]
+              })
+            ]
+          }),
+          E.kvList([
+            ['عدد الزيارات', E.arNumber(patient.visits)],
+            ['آخر زيارة', patient.lastVisit == null ? 'لا يوجد' : 'منذ ' + E.arNumber(patient.lastVisit) + ' يومًا'],
+            ['الالتزام بالمواعيد', E.pct(patient.adherence)],
+            ['مرات الغياب', E.arNumber(patient.noShows)],
+            ['الرصيد المستحق', patient.balance > 0 ? E.money(patient.balance) : 'لا يوجد']
+          ]),
+          E.panel('الوسوم', 'تصنيف تجريبي داخل الملف', [tagRow]),
+          E.panel('مواعيد اليوم', 'من جدول المحاكاة الحالي', [visitList]),
+          E.panel('الفواتير', 'كل القيم تجريبية', [invoiceList])
+        ],
+        actions: [
+          {
+            label: 'جدولة متابعة',
+            className: 'btn-primary',
+            onClick: function () { scheduleFollowup(patient); }
+          },
+          { label: 'إغلاق' }
+        ]
+      });
+    }
+
+    function scheduleFollowup(patient) {
+      var used = state.appointments.map(function (item) { return item.slot; });
+      var free = SLOTS.map(function (_, index) { return index; }).filter(function (index) { return used.indexOf(index) === -1; })[0];
+      if (free == null) { E.toast('لا توجد خانة متاحة اليوم في المحاكاة.', 'warning'); return; }
+      state.appointments.push({
+        id: nextId(), slot: free, patientId: patient.id, doctorId: DOCTORS[0].id,
+        type: 'متابعة', status: 'upcoming', wait: 0, confirmed: false, leadDays: 30
+      });
+      renderAll();
+      E.toast('أُضيفت متابعة تجريبية الساعة ' + slotLabel(free) + ' مع تذكير مقترح.', 'success');
+    }
+
+    /* ====================================================================
+       Render: billing
+       ==================================================================== */
+    function invoiceStatusText(status) {
+      return { paid: 'مدفوع', pending: 'معلّق', overdue: 'متأخر' }[status] || status;
+    }
+    function invoiceStatusClass(status) {
+      return { paid: 'status-good', pending: 'status-warn', overdue: 'status-bad' }[status] || 'status-muted';
+    }
+    function invoicePatientName(invoice) {
+      var patient = state.patients.find(function (item) { return item.id === invoice.patientId; });
+      return patient ? patient.name : 'غير معروف';
+    }
+
+    function renderBilling() {
+      var total = state.invoices.reduce(function (sum, item) { return sum + item.amount; }, 0);
+      var paid = collectedToday();
+      var pending = state.invoices.filter(function (i) { return i.status === 'pending'; }).reduce(function (s, i) { return s + i.amount; }, 0);
+      var overdue = state.invoices.filter(function (i) { return i.status === 'overdue'; });
+      var overdueSum = overdue.reduce(function (s, i) { return s + i.amount; }, 0);
+      var rate = total ? Math.round((paid / total) * 100) : 0;
+
+      E.q('[data-count="billing"]').textContent = E.arNumber(overdue.length);
+
+      var kpis = E.clear(E.q('#billingKpis'));
+      [
+        { label: 'إجمالي الفواتير', value: E.money(total), meta: E.arNumber(state.invoices.length) + ' فاتورة', trend: '' },
+        { label: 'محصّل', value: E.money(paid), meta: 'نسبة التحصيل ' + E.pct(rate), trend: 'trend-up' },
+        { label: 'معلّق', value: E.money(pending), meta: 'أقل من ٣٠ يومًا', trend: 'trend-warn' },
+        { label: 'متأخر', value: E.money(overdueSum), meta: E.arNumber(overdue.length) + ' فاتورة فوق ٣٠ يومًا', trend: 'trend-down' }
+      ].forEach(function (kpi) {
+        kpis.append(E.el('article', {
+          className: 'kpi',
+          children: [
+            E.el('span', { className: 'kpi-label', text: kpi.label }),
+            E.el('strong', { className: 'kpi-value', text: kpi.value }),
+            E.el('span', { className: 'kpi-meta ' + kpi.trend, text: kpi.meta })
+          ]
+        }));
+      });
+
+      var rows = E.clear(E.q('#invoiceRows'));
+      var list = state.invoices.filter(function (invoice) {
+        return state.billingFilter === 'all' || invoice.status === state.billingFilter;
+      });
+      var accessor = state.billingSort.key === 'name' ? invoicePatientName
+        : state.billingSort.key === 'amount' ? function (i) { return i.amount; }
+          : state.billingSort.key === 'status' ? function (i) { return invoiceStatusText(i.status); }
+            : function (i) { return i.ageDays; };
+      list = E.sortBy(list, accessor, state.billingSort.direction);
+
+      if (!list.length) {
+        rows.append(E.el('tr', { children: [E.el('td', { attrs: { colspan: '7' }, children: [E.el('p', { className: 'empty-state', text: 'لا توجد فواتير في هذه الحالة.' })] })] }));
+      }
+      list.forEach(function (invoice) {
+        var action = E.el('button', {
+          className: 'row-action',
+          type: 'button',
+          text: invoice.status === 'paid' ? 'إيصال' : 'تحصيل',
+          disabled: false
+        });
+        action.addEventListener('click', function () { openInvoice(invoice); });
+        rows.append(E.el('tr', {
+          children: [
+            E.el('td', { className: 'cell-sub', text: invoice.id }),
+            E.el('td', { text: invoicePatientName(invoice) }),
+            E.el('td', { text: invoice.service }),
+            E.el('td', { className: 'cell-num', text: E.money(invoice.amount) }),
+            E.el('td', { className: 'cell-num', text: E.arNumber(invoice.ageDays) + ' يوم' }),
+            E.el('td', { children: [E.el('span', { className: 'status ' + invoiceStatusClass(invoice.status), text: invoiceStatusText(invoice.status) })] }),
+            E.el('td', { children: [action] })
+          ]
+        }));
+      });
+
+      var byService = {};
+      state.invoices.forEach(function (invoice) {
+        byService[invoice.service] = (byService[invoice.service] || 0) + invoice.amount;
+      });
+      var palette = { 'كشف': '#1aa5b4', 'متابعة': '#7a63d4', 'استشارة': '#4d7fd6', 'إجراء صغير': '#2f9e6d' };
+      var segments = Object.keys(byService).map(function (name) {
+        return { label: name, value: byService[name], color: palette[name] || '#8b9dab', display: E.money(byService[name]) };
+      });
+      var donutHost = E.clear(E.q('#revenueDonut'));
+      donutHost.append(E.donutChart(segments, 'إجمالي', E.arNumber(total)));
+
+      var barsHost = E.clear(E.q('#collectionBars'));
+      var bars = E.el('div', { className: 'bar-list' });
+      [
+        ['نسبة التحصيل', rate, 'is-good'],
+        ['فواتير معلّقة', total ? Math.round((pending / total) * 100) : 0, 'is-warn'],
+        ['فواتير متأخرة', total ? Math.round((overdueSum / total) * 100) : 0, 'is-bad'],
+        ['دفع فوري بعد الكشف', 64, '']
+      ].forEach(function (row) {
+        bars.append(E.el('div', {
+          className: 'bar-row',
+          children: [
+            E.el('label', { text: row[0] }),
+            E.el('div', { className: 'bar-track ' + row[2], children: [E.el('span', { style: { width: E.clamp(row[1], 0, 100) + '%' } })] }),
+            E.el('b', { text: E.pct(row[1]) })
+          ]
+        }));
+      });
+      barsHost.append(bars);
+    }
+
+    function openInvoice(invoice) {
+      var actions = [];
+      if (invoice.status !== 'paid') {
+        actions.push({
+          label: 'محاكاة تسجيل السداد',
+          className: 'btn-primary',
+          onClick: function () {
+            invoice.status = 'paid';
+            var patient = state.patients.find(function (item) { return item.id === invoice.patientId; });
+            if (patient) patient.balance = Math.max(0, patient.balance - invoice.amount);
+            renderAll();
+            E.toast('تم تسجيل السداد داخل المحاكاة فقط.', 'success');
+          }
+        });
+      }
+      actions.push({ label: 'إغلاق' });
+
+      E.showDialog({
+        kicker: 'INVOICE / DEMO',
+        title: 'فاتورة ' + invoice.id,
+        content: E.frag([
+          E.resultBox(invoicePatientName(invoice) + ' · ' + invoice.service,
+            E.money(invoice.amount) + ' — ' + invoiceStatusText(invoice.status) + ' منذ ' + E.arNumber(invoice.ageDays) + ' يومًا.',
+            [
+              'الفاتورة تجريبية ولا ترتبط بأي نظام محاسبي.',
+              invoice.status === 'overdue' ? 'يُقترح رسالة تذكير بالسداد قبل الزيارة القادمة.' : 'يمكن إصدار إيصال تجريبي للمريض.',
+              'لا يتم إرسال أي رسالة فعلية من هذه الشاشة.'
+            ])
+        ]),
+        actions: actions
+      });
+    }
+
+    /* ====================================================================
+       Render: inventory
+       ==================================================================== */
+    function renderInventory() {
+      var rows = E.clear(E.q('#stockRows'));
+      var accessor = state.stockSort.key === 'name' ? function (i) { return i.name; }
+        : state.stockSort.key === 'stock' ? function (i) { return i.stock; }
+          : function (i) { return daysLeft(i); };
+      var list = E.sortBy(state.stock, accessor, state.stockSort.direction);
+
+      E.q('[data-count="inventory"]').textContent = E.arNumber(lowStock().length);
+
+      list.forEach(function (item) {
+        var ratio = E.clamp((item.stock / Math.max(1, item.min * 2)) * 100, 3, 100);
+        var tone = item.stock < item.min ? 'is-bad' : item.stock < item.min * 1.5 ? 'is-warn' : 'is-good';
+        var statusPill = item.stock < item.min
+          ? E.el('span', { className: 'status status-bad', text: 'تحت الحد' })
+          : item.stock < item.min * 1.5
+            ? E.el('span', { className: 'status status-warn', text: 'قريب من الحد' })
+            : E.el('span', { className: 'status status-good', text: 'كافٍ' });
+
+        rows.append(E.el('tr', {
+          children: [
+            E.el('td', {
+              children: [E.el('div', {
+                children: [
+                  E.el('span', { className: 'cell-main', text: item.name }),
+                  E.el('span', { className: 'cell-sub', text: item.unit })
+                ]
+              })]
+            }),
+            E.el('td', {
+              children: [E.el('div', {
+                className: 'bar-row',
+                style: { 'grid-template-columns': '38px minmax(60px, 1fr)' },
+                children: [
+                  E.el('b', { text: E.arNumber(item.stock) }),
+                  E.el('div', { className: 'bar-track ' + tone, children: [E.el('span', { style: { width: ratio + '%' } })] })
+                ]
+              })]
+            }),
+            E.el('td', { className: 'cell-num', text: E.arNumber(item.min) }),
+            E.el('td', { className: 'cell-num', text: E.arNumber(item.perWeek) }),
+            E.el('td', { className: 'cell-num', text: E.arNumber(daysLeft(item)) + ' يوم' }),
+            E.el('td', { children: [statusPill] })
+          ]
+        }));
+      });
+
+      var alerts = E.clear(E.q('#stockAlerts'));
+      var short = lowStock();
+      if (!short.length) alerts.append(alertRow('good', 'check', 'المخزون كافٍ', 'كل الأصناف أعلى من حد إعادة الطلب.', 'الآن'));
+      short.forEach(function (item) {
+        alerts.append(alertRow('bad', 'box', item.name,
+          'الرصيد ' + E.arNumber(item.stock) + ' ' + item.unit + ' مقابل حد ' + E.arNumber(item.min) + ' — يكفي ' + E.arNumber(daysLeft(item)) + ' يومًا.',
+          'يحتاج طلبًا'));
+      });
+
+      var needed = short.reduce(function (sum, item) { return sum + (item.min * 2 - item.stock) * item.cost; }, 0);
+      var costHost = E.clear(E.q('#restockCost'));
+      costHost.append(E.el('div', {
+        className: 'result-box',
+        children: [
+          E.el('strong', { text: needed ? E.money(needed) : 'لا حاجة لطلب الآن' }),
+          E.el('p', { text: needed ? 'تكلفة تقديرية لرفع كل صنف ناقص إلى ضعف حد إعادة الطلب.' : 'كل الأصناف فوق حد إعادة الطلب في هذه المحاكاة.' })
+        ]
+      }));
+    }
+
+    /* ====================================================================
+       Render: smart assistant
+       ==================================================================== */
+    function renderSmart() {
+      var appointment = topRisk();
+      var host = E.clear(E.q('#riskExplainer'));
+      var pill = E.q('#topRiskPill');
+
+      if (!appointment) {
+        pill.className = 'risk risk-low';
+        pill.textContent = 'لا توجد مخاطرة';
+        host.append(E.el('p', { className: 'empty-state', text: 'كل مواعيد اليوم مكتملة أو مؤكدة.' }));
+      } else {
+        var breakdown = riskBreakdown(appointment);
+        var patient = patientOf(appointment);
+        pill.className = 'risk risk-' + riskLevel(breakdown.score);
+        pill.textContent = riskText(breakdown.score) + ' · ' + E.pct(breakdown.score);
+
+        host.append(E.resultBox(
+          patient.name + ' · ' + slotLabel(appointment.slot),
+          appointment.type + ' مع ' + doctorOf(appointment).name + ' — احتمال الغياب ' + E.pct(breakdown.score) + '.',
+          ['العوامل بالأسفل توضح كيف تكوّن الرقم.', 'الأرقام موجبة تزيد الاحتمال والسالبة تخفضه.', 'القرار النهائي لموظف الاستقبال؛ النظام يقترح فقط.']
+        ));
+
+        var maxDelta = Math.max.apply(null, breakdown.factors.map(function (f) { return Math.abs(f.delta); }).concat([1]));
+        var factorList = E.el('div', { className: 'factor-list' });
+        breakdown.factors.forEach(function (factor) {
+          var width = (Math.abs(factor.delta) / maxDelta) * 50;
+          var fill = E.el('span', {
+            className: 'factor-fill ' + (factor.delta >= 0 ? 'is-up' : 'is-down'),
+            style: factor.delta >= 0
+              ? { 'inset-inline-start': '50%', width: width + '%' }
+              : { 'inset-inline-end': '50%', width: width + '%' }
+          });
+          factorList.append(E.el('div', {
+            className: 'factor',
+            children: [
+              E.el('div', {
+                className: 'factor-name',
+                children: [factor.label, E.el('small', { text: factor.note })]
+              }),
+              E.el('div', { className: 'factor-track', children: [fill] }),
+              E.el('b', { className: factor.delta >= 0 ? 'is-up' : 'is-down', text: (factor.delta >= 0 ? '+' : '−') + E.arNumber(Math.abs(factor.delta)) })
+            ]
+          }));
+        });
+        host.append(factorList);
+      }
+
+      renderWhatIf();
+      renderWaitlist();
       renderLoadSignal();
     }
 
-    function renderMetrics() {
-      var active = appointments.filter(function (item) { return item.status !== 'completed'; });
-      var risky = active.filter(function (item) { return riskScore(item) >= 35; });
-      var waiting = appointments.filter(function (item) { return item.status === 'waiting'; });
-      var averageWait = waiting.length ? Math.round(waiting.reduce(function (sum, item) { return sum + item.wait; }, 0) / waiting.length) : 0;
-      var revenue = appointments.filter(function (item) { return item.status === 'completed'; }).reduce(function (sum, item) { return sum + (prices[item.type] || 0); }, 0);
-      E.q('#kpiBookings').textContent = E.arNumber(appointments.length);
-      E.q('#kpiBookingsMeta').textContent = E.arNumber(active.length) + ' موعد متبقّي';
-      E.q('#kpiRisk').textContent = E.arNumber(risky.length);
-      E.q('#kpiWait').textContent = E.arNumber(averageWait) + ' د';
-      E.q('#kpiRevenue').textContent = E.money(revenue);
-      var readiness = clamp(100 - risky.length * 8 - Math.max(0, averageWait - 10), 60, 98);
-      E.q('#clinicScore').textContent = readiness + '%';
-      E.q('#clinicScoreNote').textContent = risky.length ? E.arNumber(risky.length) + ' موعد يحتاج تأكيدًا مبكرًا' : 'كل مواعيد اليوم مؤكدة';
+    function simulate(options) {
+      var active = activeAppointments();
+      var baseRisk = active.length
+        ? active.reduce(function (sum, item) { return sum + riskScore(item); }, 0) / active.length
+        : 12;
+
+      var reminderCut = options.reminderOn
+        ? 0.44 * Math.exp(-Math.pow(options.reminder - 24, 2) / (2 * Math.pow(19, 2)))
+        : 0;
+      var depositCut = options.deposit * 0.32;
+      var noShowRate = E.clamp(baseRisk * (1 - reminderCut) - depositCut, 2, 72);
+
+      var seats = active.length * (1 + options.overbook / 100);
+      var attended = seats * (1 - noShowRate / 100);
+      var averagePrice = 300;
+      var revenue = attended * averagePrice;
+      var wait = averageWait() + options.overbook * 0.55 + (options.overbook > 15 ? 3 : 0);
+
+      return {
+        noShowRate: Math.round(noShowRate),
+        attended: Math.round(attended * 10) / 10,
+        revenue: Math.round(revenue),
+        wait: Math.round(wait)
+      };
     }
 
-    function highRiskAppointment() {
-      return appointments.filter(function (item) { return item.status !== 'completed'; }).sort(function (a, b) { return riskScore(b) - riskScore(a); })[0] || null;
-    }
+    function renderWhatIf() {
+      var host = E.clear(E.q('#whatIfPanel'));
+      var outcomes = E.el('div', { className: 'outcome-grid' });
 
-    function renderSmartSignal() {
-      var item = highRiskAppointment();
-      var score = item ? riskScore(item) : 0;
-      E.q('#riskHeadline').textContent = item ? item.name + ' يحتاج تأكيدًا قبل ' + item.time : 'لا توجد مخاطرة حالية';
-      E.q('#riskExplanation').textContent = item ? (item.noShows ? 'السبب: سجل غياب سابق وعدم تأكيد الموعد حتى الآن.' : 'السبب: الموعد لم يُؤكد بعد ووقت الزيارة قريب.') : 'كل المواعيد مكتملة أو مؤكدة.';
-      E.q('#riskConfidence').textContent = E.arNumber(score) + '٪';
-      E.q('#riskConfidenceBar').style.width = score + '%';
-      E.q('#secureSlotBtn').disabled = !item;
-      renderWaitlist();
+      function refresh() {
+        var current = simulate({
+          reminderOn: true,
+          reminder: state.whatIf.reminder,
+          deposit: state.whatIf.deposit,
+          overbook: state.whatIf.overbook
+        });
+        var baseline = simulate({ reminderOn: false, reminder: 0, deposit: 0, overbook: 0 });
+
+        E.clear(outcomes);
+        [
+          { label: 'نسبة الغياب المتوقعة', value: E.pct(current.noShowRate), delta: current.noShowRate - baseline.noShowRate, invert: true },
+          { label: 'كراسي محجوزة فعليًا', value: E.arNumber(current.attended), delta: current.attended - baseline.attended, invert: false },
+          { label: 'إيراد تقديري لليوم', value: E.money(current.revenue), delta: current.revenue - baseline.revenue, invert: false },
+          { label: 'متوسط الانتظار', value: E.arNumber(current.wait) + ' د', delta: current.wait - baseline.wait, invert: true }
+        ].forEach(function (item) {
+          var better = item.invert ? item.delta < 0 : item.delta > 0;
+          var rounded = Math.round(Math.abs(item.delta) * 10) / 10;
+          outcomes.append(E.el('div', {
+            className: 'outcome',
+            children: [
+              E.el('span', { text: item.label }),
+              E.el('strong', { text: item.value }),
+              E.el('small', {
+                className: rounded === 0 ? '' : better ? 'is-good' : 'is-bad',
+                text: rounded === 0 ? 'بدون تغيير' : (item.delta > 0 ? '▲ ' : '▼ ') + E.arNumber(rounded) + ' مقابل بدون سياسات'
+              })
+            ]
+          }));
+        });
+      }
+
+      var reminderSlider = E.slider({
+        label: 'توقيت التذكير قبل الموعد',
+        min: 2, max: 72, step: 2, value: state.whatIf.reminder,
+        note: 'أفضل أثر تجريبي حول ٢٤ ساعة قبل الموعد.',
+        format: function (value) { return E.arNumber(value) + ' ساعة'; },
+        onInput: function (value) { state.whatIf.reminder = value; refresh(); }
+      });
+      var depositSlider = E.slider({
+        label: 'عربون تأكيد الحجز',
+        min: 0, max: 40, step: 5, value: state.whatIf.deposit,
+        note: 'كل ٥٪ عربون تقلل الغياب التقديري بنحو نقطة ونصف.',
+        format: function (value) { return E.pct(value); },
+        onInput: function (value) { state.whatIf.deposit = value; refresh(); }
+      });
+      var overbookSlider = E.slider({
+        label: 'حجز زائد على الطاقة',
+        min: 0, max: 25, step: 5, value: state.whatIf.overbook,
+        note: 'يزيد الإشغال لكنه يرفع متوسط الانتظار.',
+        format: function (value) { return E.pct(value); },
+        onInput: function (value) { state.whatIf.overbook = value; refresh(); }
+      });
+
+      host.append(reminderSlider.wrap, depositSlider.wrap, overbookSlider.wrap, outcomes,
+        E.el('p', { className: 'field-hint demo-warning', text: 'نموذج توضيحي مبسّط لأغراض العرض — ليس تنبؤًا إحصائيًا معتمدًا.' }));
+      refresh();
     }
 
     function renderWaitlist() {
-      var list = E.q('#waitlistList');
-      E.clear(list);
-      E.q('#waitlistCount').textContent = E.arNumber(waitlist.length) + ' مرشحين';
-      waitlist.slice(0, 3).forEach(function (person, index) {
-        var item = E.el('div', { className: 'insight' });
-        var text = E.el('div');
-        text.append(E.el('strong', { text: person.name + ' · ' + person.type }), E.el('p', { text: person.window }));
-        item.append(E.el('span', { className: 'insight-num', text: '0' + (index + 1) }), text);
-        list.append(item);
+      var list = E.clear(E.q('#waitlistList'));
+      E.q('#waitlistCount').textContent = E.arNumber(state.waitlist.length) + ' مرشحين';
+      state.waitlist.forEach(function (person, index) {
+        var call = E.el('button', { className: 'row-action insight-action', type: 'button', text: 'استدعِ' });
+        call.addEventListener('click', function () { fillFromWaitlist(person); });
+        list.append(E.el('div', {
+          className: 'insight',
+          children: [
+            E.el('span', { className: 'insight-num', text: '٠' + E.arNumber(index + 1) }),
+            E.el('div', {
+              children: [
+                E.el('strong', { text: person.name + ' · ' + person.type }),
+                E.el('p', { text: person.window + ' — أولوية ' + person.priority })
+              ]
+            }),
+            call
+          ]
+        }));
       });
-      if (!waitlist.length) list.append(E.el('p', { className: 'empty-state', text: 'قائمة الانتظار فارغة حاليًا' }));
+      if (!state.waitlist.length) list.append(E.el('p', { className: 'empty-state', text: 'قائمة الانتظار فارغة حاليًا' }));
+    }
+
+    function fillFromWaitlist(person) {
+      var used = state.appointments.map(function (item) { return item.slot; });
+      var free = SLOTS.map(function (_, index) { return index; }).filter(function (index) { return used.indexOf(index) === -1; })[0];
+      if (free == null) { E.toast('لا توجد خانة فارغة — ألغِ موعدًا أولًا.', 'warning'); return; }
+
+      var patient = {
+        id: 'p' + nextId(),
+        code: person.phone,
+        name: person.name,
+        age: 30,
+        visits: 0,
+        lastVisit: null,
+        noShows: 0,
+        adherence: 80,
+        balance: 0,
+        tags: ['من قائمة الانتظار']
+      };
+      state.patients.push(patient);
+      state.appointments.push({
+        id: nextId(), slot: free, patientId: patient.id, doctorId: DOCTORS[0].id,
+        type: person.type, status: 'secured', wait: 0, confirmed: true, leadDays: 0
+      });
+      state.waitlist = state.waitlist.filter(function (item) { return item.id !== person.id; });
+      renderAll();
+      E.toast('تم ملء خانة ' + slotLabel(free) + ' تجريبيًا من قائمة الانتظار.', 'success');
+      E.announce('تمت إضافة ' + person.name + ' إلى جدول اليوم');
     }
 
     function renderLoadSignal() {
-      var slots = { '٤': 0, '٥': 0, '٦': 0 };
-      appointments.forEach(function (item) { var hour = item.time.charAt(0); if (slots[hour] != null) slots[hour] += 1; });
-      var peak = Object.keys(slots).sort(function (a, b) { return slots[b] - slots[a]; })[0];
-      var wrap = E.q('#loadSignal');
-      E.clear(wrap);
-      wrap.append(E.el('div', { className: 'result-box', children: [E.el('strong', { text: 'أعلى ضغط متوقع: الساعة ' + peak }), E.el('p', { text: 'اقتراح: اترك ١٠ دقائق مرنة قبل هذه الفترة لاستقبال الحالات المتأخرة.' })] }));
+      var buckets = {};
+      state.appointments.forEach(function (item) {
+        var hour = slotLabel(item.slot).charAt(0);
+        buckets[hour] = (buckets[hour] || 0) + 1;
+      });
+      var peak = Object.keys(buckets).sort(function (a, b) { return buckets[b] - buckets[a]; })[0];
+      var wrap = E.clear(E.q('#loadSignal'));
+      wrap.append(E.el('div', {
+        className: 'result-box',
+        children: [
+          E.el('strong', { text: peak ? 'أعلى ضغط متوقع: الساعة ' + peak : 'لا توجد مواعيد اليوم' }),
+          E.el('p', { text: peak ? 'اقتراح: اترك ١٠ دقائق مرنة قبل هذه الفترة لاستقبال الحالات المتأخرة.' : 'أضف حجزًا لبدء المحاكاة.' })
+        ]
+      }));
     }
 
-    function showAppointment(item) {
-      if (!item) return;
-      var score = riskScore(item);
-      var content = E.resultBox(item.name + ' · ' + item.time, 'درجة احتمال الغياب ' + E.arNumber(score) + '٪ — ' + riskText(score) + '.', [
-        item.confirmed ? 'الموعد مؤكد بالفعل.' : 'لا يوجد تأكيد حديث للموعد.',
-        item.noShows ? 'لديه ' + E.arNumber(item.noShows) + ' حالة غياب سابقة في البيانات التجريبية.' : 'لا يوجد غياب سابق مسجّل.',
-        'القرار النهائي لموظف الاستقبال؛ النظام يقترح فقط.'
-      ]);
+    /* ====================================================================
+       Render: reports
+       ==================================================================== */
+    function renderReports() {
+      var tabs = E.clear(E.q('#trendTabs'));
+      [['week', 'آخر أسبوع'], ['month', 'آخر شهر']].forEach(function (entry) {
+        var button = E.el('button', {
+          className: 'filter-btn',
+          type: 'button',
+          text: entry[1],
+          attrs: { 'aria-pressed': state.trendRange === entry[0] ? 'true' : 'false' }
+        });
+        button.addEventListener('click', function () { state.trendRange = entry[0]; renderReports(); });
+        tabs.append(button);
+      });
+
+      var data = TRENDS[state.trendRange];
+      var trendHost = E.clear(E.q('#trendChart'));
+      trendHost.append(E.lineChart({
+        labels: data.labels,
+        ariaLabel: 'اتجاه الحجوزات وحالات الغياب',
+        series: [
+          { name: 'حجوزات', color: '#1aa5b4', values: data.bookings },
+          { name: 'غياب', color: '#d15757', values: data.noShows }
+        ]
+      }));
+      trendHost.append(E.legend([
+        { label: 'حجوزات', color: '#1aa5b4' },
+        { label: 'حالات غياب', color: '#d15757' }
+      ]));
+
+      var perDoctor = DOCTORS.map(function (doctor) {
+        var mine = state.appointments.filter(function (item) { return item.doctorId === doctor.id; });
+        return {
+          name: doctor.name,
+          completed: mine.filter(function (item) { return item.status === 'completed'; }).length,
+          risky: mine.filter(function (item) { return riskScore(item) >= 33; }).length
+        };
+      });
+      var doctorHost = E.clear(E.q('#doctorChart'));
+      doctorHost.append(E.barChart({
+        labels: perDoctor.map(function (item) { return item.name; }),
+        ariaLabel: 'أداء الأطباء',
+        height: 200,
+        series: [
+          { name: 'زيارات مكتملة', color: '#2f9e6d', values: perDoctor.map(function (item) { return item.completed; }) },
+          { name: 'مواعيد معرضة للغياب', color: '#d9922b', values: perDoctor.map(function (item) { return item.risky; }) }
+        ]
+      }));
+      doctorHost.append(E.legend([
+        { label: 'زيارات مكتملة', color: '#2f9e6d' },
+        { label: 'معرضة للغياب', color: '#d9922b' }
+      ]));
+
+      var completed = state.appointments.filter(function (item) { return item.status === 'completed'; });
+      var summary = E.clear(E.q('#reportSummary'));
+      summary.append(E.kvList([
+        ['إجمالي مواعيد اليوم', E.arNumber(state.appointments.length)],
+        ['زيارات مكتملة', E.arNumber(completed.length)],
+        ['مواعيد معرضة للغياب', E.arNumber(riskyAppointments().length)],
+        ['متوسط الانتظار', E.arNumber(averageWait()) + ' دقيقة'],
+        ['محصّل اليوم', E.money(collectedToday())],
+        ['مستحقات معلّقة', E.money(outstanding())],
+        ['أصناف تحت حد الطلب', E.arNumber(lowStock().length)]
+      ]));
+    }
+
+    /* ====================================================================
+       Appointment actions
+       ==================================================================== */
+    function openAppointment(appointment) {
+      if (!appointment) return;
+      var patient = patientOf(appointment);
+      var breakdown = riskBreakdown(appointment);
+      var reasons = breakdown.factors.map(function (factor) {
+        return factor.label + ' — ' + factor.note + ' (' + (factor.delta >= 0 ? '+' : '−') + E.arNumber(Math.abs(factor.delta)) + ')';
+      });
+
+      var content = E.resultBox(
+        patient.name + ' · ' + slotLabel(appointment.slot),
+        appointment.type + ' مع ' + doctorOf(appointment).name + ' — ' +
+          (appointment.status === 'completed' ? 'الزيارة مكتملة.' : 'احتمال الغياب ' + E.pct(breakdown.score) + ' (' + riskText(breakdown.score) + ').'),
+        appointment.status === 'completed'
+          ? ['يمكن جدولة متابعة تجريبية بعد ٣٠ يومًا.', 'الفاتورة المرتبطة تظهر في قسم الفوترة.', 'لا يتم إرسال أي رسالة فعلية.']
+          : reasons.concat(['القرار النهائي لموظف الاستقبال؛ النظام يقترح فقط.'])
+      );
+
       var actions = [];
-      if (item.status === 'completed') {
-        actions.push({ label: 'جدولة متابعة بعد ٣٠ يومًا', className: 'btn-primary', onClick: function () { scheduleFollowup(item); } });
+      if (appointment.status === 'completed') {
+        actions.push({ label: 'جدولة متابعة', className: 'btn-primary', onClick: function () { scheduleFollowup(patient); } });
       } else {
-        actions.push({ label: 'محاكاة رسالة تأكيد', className: 'btn-primary', onClick: function () { item.confirmed = true; item.status = 'secured'; renderAppointments(); E.toast('تمت محاكاة رسالة التأكيد — لم يتم إرسال رسالة حقيقية.', 'success'); E.announce('تم تأمين موعد ' + item.name); } });
-        actions.push({ label: 'تم الكشف', onClick: function () { item.status = 'completed'; item.wait = 0; renderAppointments(); E.toast('تم تحديث الزيارة محليًا.', 'success'); } });
+        actions.push({
+          label: 'محاكاة رسالة تأكيد',
+          className: 'btn-primary',
+          onClick: function () {
+            appointment.confirmed = true;
+            appointment.status = 'secured';
+            renderAll();
+            E.toast('تمت محاكاة رسالة التأكيد — لم تُرسل رسالة حقيقية.', 'success');
+            E.announce('تم تأمين موعد ' + patient.name);
+          }
+        });
+        actions.push({
+          label: 'تم الكشف',
+          onClick: function () {
+            appointment.status = 'completed';
+            appointment.wait = 0;
+            state.invoices.push({
+              id: 'INV-' + nextId(),
+              patientId: patient.id,
+              service: appointment.type,
+              amount: PRICES[appointment.type] || 300,
+              ageDays: 0,
+              status: 'paid'
+            });
+            patient.visits += 1;
+            patient.lastVisit = 0;
+            renderAll();
+            E.toast('تم تسجيل الزيارة وإصدار فاتورة تجريبية.', 'success');
+          }
+        });
+        actions.push({
+          label: 'لم يحضر',
+          className: 'btn-danger',
+          onClick: function () {
+            appointment.status = 'missed';
+            patient.noShows += 1;
+            patient.adherence = Math.max(20, patient.adherence - 12);
+            renderAll();
+            E.toast('تم تسجيل غياب تجريبي — القائمة اقترحت مرشحًا بديلًا.', 'warning');
+          }
+        });
       }
+      actions.push({ label: 'إغلاق' });
+
       E.showDialog({ kicker: 'APPOINTMENT REVIEW', title: 'مراجعة الموعد', content: content, actions: actions });
-    }
-
-    function scheduleFollowup(item) {
-      var id = Date.now();
-      appointments.push({ id: id, time: '٥:٠٠', name: item.name, phone: item.phone, type: 'متابعة', status: 'upcoming', noShows: item.noShows, wait: 0, confirmed: false });
-      renderAppointments();
-      E.toast('أُضيفت متابعة تجريبية مع تذكير مقترح.', 'success');
-    }
-
-    function openSecureSuggestion() {
-      var item = highRiskAppointment();
-      if (!item) return;
-      var candidate = waitlist.find(function (person) { return person.type === item.type; }) || waitlist[0];
-      var reasons = ['ابدأ بتأكيد موعد ' + item.name + ' قبل اتخاذ أي إجراء.', 'إذا لم يؤكد، المرشح الأقرب هو ' + (candidate ? candidate.name : 'لا يوجد مرشح حاليًا') + '.', 'كل الرسائل هنا معاينة فقط وتحتاج قرار الموظف.'];
-      var content = E.resultBox('خطة تأمين الكرسي ' + item.time, 'المساعد جهّز مسارًا من خطوتين بدل إلغاء الموعد مباشرة.', reasons);
-      E.showDialog({ kicker: 'SMART WAITLIST', title: 'الإجراء المقترح', content: content, actions: [
-        { label: 'أكد الموعد الأصلي', className: 'btn-primary', onClick: function () { item.confirmed = true; item.status = 'secured'; renderAppointments(); E.toast('تم تأكيد الموعد داخل المحاكاة.', 'success'); } },
-        { label: 'املأ من الانتظار', close: false, onClick: function () { if (!candidate) { E.toast('لا يوجد مرشح متاح.', 'warning'); return; } item.name = candidate.name; item.phone = candidate.phone; item.noShows = 0; item.confirmed = true; item.status = 'secured'; waitlist = waitlist.filter(function (person) { return person.id !== candidate.id; }); renderAppointments(); E.closeDialog(); E.toast('تم ملء الموعد تجريبيًا من قائمة الانتظار.', 'success'); } }
-      ] });
     }
 
     function openBooking() {
       var form = E.el('form', { className: 'form-grid', attrs: { novalidate: 'novalidate' } });
       form.addEventListener('submit', function (event) { event.preventDefault(); });
+
       var name = E.field({ id: 'patientName', label: 'اسم المريض', required: true, maxLength: 60, placeholder: 'الاسم بالكامل', attrs: { autocomplete: 'off' } });
-      var phone = E.field({ id: 'patientPhone', label: 'رقم الموبايل', type: 'tel', required: true, maxLength: 15, placeholder: 'TEST-001', attrs: { inputmode: 'tel', autocomplete: 'off' } });
-      var type = E.field({ id: 'visitType', label: 'نوع الزيارة', type: 'select', options: Object.keys(prices).map(function (value) { return { label: value + ' · ' + E.money(prices[value]), value: value }; }) });
-      var occupied = appointments.map(function (item) { return item.time; });
-      var allSlots = ['٤:٠٠', '٤:٣٠', '٥:٠٠', '٥:٣٠', '٦:٠٠', '٦:٣٠', '٧:٠٠', '٧:٣٠'];
-      var available = allSlots.filter(function (slot) { return occupied.indexOf(slot) === -1; });
-      var time = E.field({ id: 'visitTime', label: 'الموعد المتاح', type: 'select', options: available.map(function (value) { return { label: value, value: value }; }) });
+      var phone = E.field({ id: 'patientPhone', label: 'كود التواصل التجريبي', type: 'tel', required: true, maxLength: 15, placeholder: 'TEST-000', attrs: { inputmode: 'tel', autocomplete: 'off' } });
+      var type = E.field({
+        id: 'visitType', label: 'نوع الزيارة', type: 'select',
+        options: Object.keys(PRICES).map(function (value) { return { label: value + ' · ' + E.money(PRICES[value]), value: value }; })
+      });
+      var doctor = E.field({
+        id: 'visitDoctor', label: 'الطبيب', type: 'select',
+        options: DOCTORS.map(function (item) { return { label: item.name + ' · ' + item.specialty, value: item.id }; })
+      });
+      var used = state.appointments.map(function (item) { return item.slot; });
+      var available = SLOTS.map(function (label, index) { return { label: label, value: String(index) }; })
+        .filter(function (option) { return used.indexOf(Number(option.value)) === -1; });
+      var time = E.field({ id: 'visitTime', label: 'الموعد المتاح', type: 'select', options: available });
       var error = E.el('p', { className: 'field-error full', attrs: { role: 'alert' } });
-      form.append(name.wrap, phone.wrap, type.wrap, time.wrap, E.el('p', { className: 'field-hint demo-warning full', text: 'للعرض فقط — لا تدخل بيانات مرضى حقيقية.' }), error);
-      E.showDialog({ kicker: 'SMART BOOKING', title: 'حجز موعد جديد', content: form, actions: [
-        { label: 'حفظ ومحاكاة التذكير', className: 'btn-primary', close: false, onClick: function () {
-          var patient = E.cleanText(name.input.value, 60);
-          var mobile = E.phoneDigits(phone.input.value);
-          var visitType = prices[type.input.value] ? type.input.value : '';
-          var slot = available.indexOf(time.input.value) >= 0 ? time.input.value : '';
-          if (patient.length < 2 || !E.validPhone(mobile) || !visitType || !slot) { error.textContent = 'اكتب اسمًا صحيحًا ورقم موبايل من ١٠–١٥ رقمًا واختر موعدًا متاحًا.'; return; }
-          appointments.push({ id: Date.now(), time: slot, name: patient, phone: mobile, type: visitType, status: 'upcoming', noShows: 0, wait: 0, confirmed: false });
-          renderAppointments(); E.closeDialog(); E.toast('تم الحجز. معاينة تذكير قبل ٢٤ ساعة وقبل ساعتين — بدون إرسال فعلي.', 'success'); E.announce('تمت إضافة حجز جديد باسم ' + patient);
-        } },
-        { label: 'إلغاء' }
-      ] });
+
+      form.append(name.wrap, phone.wrap, type.wrap, doctor.wrap, time.wrap,
+        E.el('p', { className: 'field-hint demo-warning full', text: 'للعرض فقط — لا تدخل بيانات مرضى حقيقية.' }), error);
+
+      var dayFull = !available.length;
+      if (dayFull) {
+        error.textContent = 'كل خانات اليوم محجوزة في المحاكاة. ألغِ موعدًا أو أعد ضبط الديمو.';
+        time.input.disabled = true;
+      }
+
+      E.showDialog({
+        kicker: 'SMART BOOKING',
+        title: 'حجز موعد جديد',
+        content: form,
+        actions: [
+          {
+            label: dayFull ? 'لا توجد خانات متاحة' : 'حفظ ومحاكاة التذكير',
+            className: 'btn-primary',
+            close: false,
+            disabled: dayFull,
+            onClick: function () {
+              var patientName = E.cleanText(name.input.value, 60);
+              var contact = E.cleanText(phone.input.value, 15);
+              var visitType = PRICES[type.input.value] ? type.input.value : '';
+              var slot = Number(time.input.value);
+              var slotValid = available.some(function (option) { return Number(option.value) === slot; });
+              if (patientName.length < 2 || contact.length < 3 || !visitType || !slotValid) {
+                error.textContent = 'اكتب اسمًا صحيحًا وكود تواصل تجريبي واختر موعدًا متاحًا.';
+                return;
+              }
+              var patient = {
+                id: 'p' + nextId(),
+                code: contact,
+                name: patientName,
+                age: 30,
+                visits: 0,
+                lastVisit: null,
+                noShows: 0,
+                adherence: 78,
+                balance: 0,
+                tags: ['حجز جديد']
+              };
+              state.patients.push(patient);
+              state.appointments.push({
+                id: nextId(), slot: slot, patientId: patient.id, doctorId: doctor.input.value,
+                type: visitType, status: 'upcoming', wait: 0, confirmed: false, leadDays: 1
+              });
+              renderAll();
+              E.closeDialog();
+              E.toast('تم الحجز. معاينة تذكير قبل ٢٤ ساعة وقبل ساعتين — بدون إرسال فعلي.', 'success');
+              E.announce('تمت إضافة حجز جديد باسم ' + patientName);
+            }
+          },
+          { label: 'إلغاء' }
+        ]
+      });
       window.setTimeout(function () { name.input.focus(); }, 50);
     }
 
+    function openNewPatient() {
+      var form = E.el('form', { className: 'form-grid', attrs: { novalidate: 'novalidate' } });
+      form.addEventListener('submit', function (event) { event.preventDefault(); });
+      var name = E.field({ id: 'newPatientName', label: 'اسم المريض', required: true, maxLength: 60, placeholder: 'الاسم بالكامل' });
+      var code = E.field({ id: 'newPatientCode', label: 'كود الملف التجريبي', maxLength: 15, placeholder: 'TEST-P00' });
+      var age = E.field({ id: 'newPatientAge', label: 'السن', type: 'number', min: 0, max: 120, value: 30 });
+      var error = E.el('p', { className: 'field-error full', attrs: { role: 'alert' } });
+      form.append(name.wrap, code.wrap, age.wrap,
+        E.el('p', { className: 'field-hint demo-warning full', text: 'للعرض فقط — لا تدخل بيانات مرضى حقيقية.' }), error);
+
+      E.showDialog({
+        kicker: 'PATIENT FILE',
+        title: 'ملف مريض جديد',
+        content: form,
+        actions: [
+          {
+            label: 'إنشاء الملف',
+            className: 'btn-primary',
+            close: false,
+            onClick: function () {
+              var patientName = E.cleanText(name.input.value, 60);
+              if (patientName.length < 2) { error.textContent = 'اكتب اسمًا صحيحًا (حرفين على الأقل).'; return; }
+              state.patients.push({
+                id: 'p' + nextId(),
+                code: E.cleanText(code.input.value, 15) || 'TEST-P' + nextId(),
+                name: patientName,
+                age: Math.round(E.clamp(Number(age.input.value) || 30, 0, 120)),
+                visits: 0,
+                lastVisit: null,
+                noShows: 0,
+                adherence: 80,
+                balance: 0,
+                tags: ['ملف جديد']
+              });
+              renderAll();
+              E.closeDialog();
+              E.toast('تم إنشاء ملف تجريبي داخل الصفحة فقط.', 'success');
+            }
+          },
+          { label: 'إلغاء' }
+        ]
+      });
+    }
+
+    function openSecureSuggestion() {
+      var appointment = topRisk();
+      if (!appointment) { E.toast('لا توجد مواعيد تحتاج إجراءً الآن.', 'warning'); return; }
+      var patient = patientOf(appointment);
+      var candidate = state.waitlist.find(function (person) { return person.type === appointment.type; }) || state.waitlist[0];
+
+      E.showDialog({
+        kicker: 'SMART WAITLIST',
+        title: 'الإجراء المقترح',
+        content: E.resultBox('خطة تأمين الكرسي ' + slotLabel(appointment.slot),
+          'المساعد جهّز مسارًا من خطوتين بدل إلغاء الموعد مباشرة.',
+          [
+            'ابدأ بتأكيد موعد ' + patient.name + ' قبل اتخاذ أي إجراء.',
+            'إذا لم يؤكد، المرشح الأقرب هو ' + (candidate ? candidate.name + ' (' + candidate.type + ')' : 'لا يوجد مرشح حاليًا') + '.',
+            'كل الرسائل هنا معاينة فقط وتحتاج قرار الموظف.'
+          ]),
+        actions: [
+          {
+            label: 'أكد الموعد الأصلي',
+            className: 'btn-primary',
+            onClick: function () {
+              appointment.confirmed = true;
+              appointment.status = 'secured';
+              renderAll();
+              E.toast('تم تأكيد الموعد داخل المحاكاة.', 'success');
+            }
+          },
+          {
+            label: 'املأ من الانتظار',
+            close: false,
+            onClick: function () {
+              if (!candidate) { E.toast('لا يوجد مرشح متاح.', 'warning'); return; }
+              appointment.patientId = null;
+              var replacement = {
+                id: 'p' + nextId(),
+                code: candidate.phone,
+                name: candidate.name,
+                age: 32,
+                visits: 0,
+                lastVisit: null,
+                noShows: 0,
+                adherence: 82,
+                balance: 0,
+                tags: ['من قائمة الانتظار']
+              };
+              state.patients.push(replacement);
+              appointment.patientId = replacement.id;
+              appointment.confirmed = true;
+              appointment.status = 'secured';
+              appointment.leadDays = 0;
+              state.waitlist = state.waitlist.filter(function (person) { return person.id !== candidate.id; });
+              renderAll();
+              E.closeDialog();
+              E.toast('تم ملء الموعد تجريبيًا من قائمة الانتظار.', 'success');
+            }
+          },
+          { label: 'إغلاق' }
+        ]
+      });
+    }
+
     function showDailyBrief() {
-      var active = appointments.filter(function (item) { return item.status !== 'completed'; });
-      var risky = active.filter(function (item) { return riskScore(item) >= 35; });
-      var text = 'عندك ' + E.arNumber(active.length) + ' مواعيد متبقية، و' + E.arNumber(risky.length) + ' يحتاج تأكيدًا. أعلى ضغط متوقع بين الخامسة والسادسة.';
-      E.showDialog({ kicker: 'DAILY COPILOT', title: 'ملخص اليوم الذكي', content: E.resultBox('ما يحتاج انتباهك الآن', text, ['ابدأ بتأكيد أعلى موعد مخاطرة.', 'اترك ١٠ دقائق مرنة وقت الذروة.', 'راجع قائمة الانتظار قبل أي إلغاء.']) });
+      var active = activeAppointments();
+      var risky = riskyAppointments();
+      var short = lowStock();
+      E.showDialog({
+        kicker: 'DAILY COPILOT',
+        title: 'ملخص اليوم الذكي',
+        content: E.resultBox('ما يحتاج انتباهك الآن',
+          'عندك ' + E.arNumber(active.length) + ' مواعيد متبقية، و' + E.arNumber(risky.length) + ' منها يحتاج تأكيدًا.',
+          [
+            risky.length ? 'ابدأ بتأكيد أعلى موعد مخاطرة: ' + patientOf(topRisk()).name + '.' : 'كل المواعيد المتبقية مؤكدة.',
+            'اترك ١٠ دقائق مرنة وقت الذروة.',
+            state.invoices.filter(function (i) { return i.status === 'overdue'; }).length
+              ? 'راجع ' + E.arNumber(state.invoices.filter(function (i) { return i.status === 'overdue'; }).length) + ' فاتورة متأخرة قبل نهاية اليوم.'
+              : 'لا توجد فواتير متأخرة.',
+            short.length ? 'اطلب تعبئة: ' + short.map(function (i) { return i.name; }).join('، ') + '.' : 'المخزون كافٍ اليوم.'
+          ])
+      });
     }
 
     function showNightReport() {
-      var completed = appointments.filter(function (item) { return item.status === 'completed'; });
-      var revenue = completed.reduce(function (sum, item) { return sum + (prices[item.type] || 0); }, 0);
-      E.showDialog({ kicker: '9 PM REPORT / PREVIEW', title: 'تقرير صاحب العيادة', content: E.resultBox('ملخص تجريبي على الموبايل', 'تمت ' + E.arNumber(completed.length) + ' زيارات بإيراد ' + E.money(revenue) + '. نسبة الغياب التجريبية بعد التذكير ٩٪.', ['هذه معاينة داخل الصفحة فقط.', 'لا يتم إرسال بيانات مرضى أو رسائل واتساب.', 'يمكن تخصيص المؤشرات حسب العيادة.']) });
+      var completed = state.appointments.filter(function (item) { return item.status === 'completed'; });
+      E.showDialog({
+        kicker: '9 PM REPORT / PREVIEW',
+        title: 'تقرير صاحب العيادة',
+        content: E.frag([
+          E.resultBox('ملخص تجريبي على الموبايل',
+            'تمت ' + E.arNumber(completed.length) + ' زيارات بإيراد ' + E.money(collectedToday()) + '. نسبة الغياب التجريبية بعد التذكير ٩٪.',
+            [
+              'هذه معاينة داخل الصفحة فقط.',
+              'لا يتم إرسال بيانات مرضى أو رسائل واتساب.',
+              'يمكن تخصيص المؤشرات حسب العيادة.'
+            ]),
+          E.kvList([
+            ['مستحقات معلّقة', E.money(outstanding())],
+            ['مواعيد لم تُؤكد', E.arNumber(activeAppointments().filter(function (i) { return !i.confirmed; }).length)],
+            ['أصناف تحت حد الطلب', E.arNumber(lowStock().length)]
+          ])
+        ])
+      });
     }
 
-    function sendReminders() {
+    function sendReminders(subset) {
+      var target = subset && subset.length ? subset : activeAppointments();
       var count = 0;
-      appointments.forEach(function (item) { if (item.status === 'upcoming' && !item.confirmed) { item.confirmed = true; item.status = 'secured'; count += 1; } });
-      renderAppointments();
-      E.toast('تمت محاكاة ' + E.arNumber(count) + ' رسائل تذكير — بدون إرسال فعلي.', 'success');
+      target.forEach(function (appointment) {
+        if (!appointment.confirmed) {
+          appointment.confirmed = true;
+          appointment.status = 'secured';
+          count += 1;
+        }
+      });
+      renderAll();
+      E.toast('تمت محاكاة ' + E.arNumber(count) + ' رسالة تذكير — بدون إرسال فعلي.', count ? 'success' : 'warning');
       E.announce('اكتملت محاكاة التذكيرات');
     }
 
     function optimizeSchedule() {
-      appointments.sort(function (a, b) { return riskScore(b) - riskScore(a); });
-      E.toast('تم ترتيب قائمة المراجعة حسب المخاطرة؛ أوقات المرضى لم تتغير.', 'success');
+      state.apptSort = { key: 'risk', direction: 'desc' };
+      state.apptFilter = 'risk';
+      E.qa('[data-filter]').forEach(function (button) {
+        button.setAttribute('aria-pressed', button.dataset.filter === 'risk' ? 'true' : 'false');
+      });
       renderAppointments();
+      E.toast('تم ترتيب قائمة المراجعة حسب المخاطرة؛ أوقات المرضى لم تتغير.', 'success');
+    }
+
+    /* Moves the simulated day forward one step: the waiting patient is seen,
+       the next confirmed patient checks in, and unconfirmed risk grows. */
+    function advanceDay() {
+      var waiting = state.appointments.find(function (item) { return item.status === 'waiting'; });
+      if (waiting) {
+        waiting.status = 'completed';
+        waiting.wait = 0;
+        var patient = patientOf(waiting);
+        patient.visits += 1;
+        patient.lastVisit = 0;
+        state.invoices.push({
+          id: 'INV-' + nextId(),
+          patientId: patient.id,
+          service: waiting.type,
+          amount: PRICES[waiting.type] || 300,
+          ageDays: 0,
+          status: 'paid'
+        });
+      }
+      var next = state.appointments
+        .filter(function (item) { return item.status === 'upcoming' || item.status === 'secured'; })
+        .sort(function (a, b) { return a.slot - b.slot; })[0];
+      if (next) {
+        next.status = 'waiting';
+        next.wait = 6 + Math.round(E.seededScore(next.id + '-wait', 0, 9));
+      }
+      state.stock.forEach(function (item) { item.stock = Math.max(0, item.stock - 1); });
+      renderAll();
+      if (!waiting && !next) E.toast('انتهى اليوم في المحاكاة. أعد ضبط الديمو للبدء من جديد.', 'warning');
+      else E.toast('تقدّم اليوم خطوة: تم كشف حالة واستُدعيت الحالة التالية.', 'success');
     }
 
     function resetDemo() {
-      appointments = clone(originalAppointments);
-      waitlist = clone(originalWaitlist);
-      filter = 'all';
+      state.patients = clone(BASE_PATIENTS);
+      state.appointments = clone(BASE_APPOINTMENTS);
+      state.waitlist = clone(BASE_WAITLIST);
+      state.invoices = clone(BASE_INVOICES);
+      state.stock = clone(BASE_STOCK);
+      state.apptFilter = 'all';
+      state.apptSearch = '';
+      state.apptDoctor = 'all';
+      state.patientFilter = 'all';
+      state.patientSearch = '';
+      state.billingFilter = 'all';
+      state.selection = [];
+      state.whatIf = { reminder: 24, deposit: 0, overbook: 0 };
+      state.nextId = 900;
+
+      E.q('#apptSearch').value = '';
+      E.q('#patientSearch').value = '';
+      E.q('#doctorFilter').value = 'all';
       E.qa('[data-filter]').forEach(function (button) { button.setAttribute('aria-pressed', button.dataset.filter === 'all' ? 'true' : 'false'); });
-      renderAppointments();
+      E.qa('[data-pfilter]').forEach(function (button) { button.setAttribute('aria-pressed', button.dataset.pfilter === 'all' ? 'true' : 'false'); });
+      E.qa('[data-bfilter]').forEach(function (button) { button.setAttribute('aria-pressed', button.dataset.bfilter === 'all' ? 'true' : 'false'); });
+
+      renderAll();
       E.toast('رجعت بيانات Clinic V2 للوضع الأصلي.', 'success');
+    }
+
+    /* ====================================================================
+       Wiring
+       ==================================================================== */
+    function renderAll() {
+      state.selection = state.selection.filter(function (id) {
+        return state.appointments.some(function (item) { return item.id === id; });
+      });
+      renderOverview();
+      renderAppointments();
+      renderPatients();
+      renderBilling();
+      renderInventory();
+      renderSmart();
+      renderReports();
+    }
+
+    function bindFilters(attribute, apply) {
+      E.qa('[' + attribute + ']').forEach(function (button) {
+        button.addEventListener('click', function () {
+          E.qa('[' + attribute + ']').forEach(function (item) {
+            item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
+          });
+          apply(button.getAttribute(attribute));
+        });
+      });
     }
 
     E.bindGate('عيادة تجريبية ENGAZ');
     E.bindDialogClose();
-    renderAppointments();
+    E.bindDrawer();
+    E.bindTheme();
+    E.bindNav();
 
-    E.qa('[data-scroll]').forEach(function (button) {
-      button.addEventListener('click', function () {
-        E.qa('[data-scroll]').forEach(function (item) { item.removeAttribute('aria-current'); });
-        button.setAttribute('aria-current', 'page');
-        var target = E.q('#' + button.dataset.scroll);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var doctorSelect = E.q('#doctorFilter');
+    doctorSelect.append(E.el('option', { text: 'كل الأطباء', value: 'all' }));
+    DOCTORS.forEach(function (item) {
+      doctorSelect.append(E.el('option', { text: item.name + ' · ' + item.specialty, value: item.id }));
+    });
+    doctorSelect.addEventListener('change', function () {
+      state.apptDoctor = doctorSelect.value;
+      renderAppointments();
+    });
+
+    bindFilters('data-filter', function (value) { state.apptFilter = value; renderAppointments(); });
+    bindFilters('data-pfilter', function (value) { state.patientFilter = value; renderPatients(); });
+    bindFilters('data-bfilter', function (value) { state.billingFilter = value; renderBilling(); });
+
+    E.q('#apptSearch').addEventListener('input', E.debounce(function (event) {
+      state.apptSearch = E.cleanText(event.target.value, 40);
+      renderAppointments();
+    }, 160));
+    E.q('#patientSearch').addEventListener('input', E.debounce(function (event) {
+      state.patientSearch = E.cleanText(event.target.value, 40);
+      renderPatients();
+    }, 160));
+
+    E.bindSort(E.q('#apptTable'), state.apptSort, renderAppointments);
+    E.bindSort(E.q('#patientTable'), state.patientSort, renderPatients);
+    E.bindSort(E.q('#invoiceTable'), state.billingSort, renderBilling);
+    E.bindSort(E.q('#stockTable'), state.stockSort, renderInventory);
+
+    E.q('#selectAll').addEventListener('change', function (event) {
+      var visible = visibleAppointments();
+      if (event.target.checked) {
+        visible.forEach(function (item) {
+          if (state.selection.indexOf(item.id) === -1) state.selection.push(item.id);
+        });
+      } else {
+        var ids = visible.map(function (item) { return item.id; });
+        state.selection = state.selection.filter(function (id) { return ids.indexOf(id) === -1; });
+      }
+      renderAppointments();
+    });
+    E.q('#bulkClearBtn').addEventListener('click', function () { state.selection = []; renderAppointments(); });
+    E.q('#bulkConfirmBtn').addEventListener('click', function () {
+      selectedAppointments().forEach(function (item) {
+        if (item.status !== 'completed' && item.status !== 'missed') { item.confirmed = true; item.status = 'secured'; }
       });
+      var count = state.selection.length;
+      state.selection = [];
+      renderAll();
+      E.toast('تم تأكيد ' + E.arNumber(count) + ' موعد داخل المحاكاة.', 'success');
     });
-    E.qa('[data-filter]').forEach(function (button) {
-      button.addEventListener('click', function () {
-        filter = ['all', 'risk', 'waiting'].indexOf(button.dataset.filter) >= 0 ? button.dataset.filter : 'all';
-        E.qa('[data-filter]').forEach(function (item) { item.setAttribute('aria-pressed', item === button ? 'true' : 'false'); });
-        renderAppointments();
-      });
+    E.q('#bulkRemindBtn').addEventListener('click', function () {
+      var subset = selectedAppointments();
+      state.selection = [];
+      sendReminders(subset);
     });
-    E.q('#appointmentRows').addEventListener('click', function (event) {
-      var button = event.target.closest('[data-appointment-id]');
-      if (!button) return;
-      var id = Number(button.dataset.appointmentId);
-      showAppointment(appointments.find(function (item) { return item.id === id; }));
-    });
+
     E.q('#newBookingBtn').addEventListener('click', openBooking);
+    E.q('#newBookingBtn2').addEventListener('click', openBooking);
+    E.q('#newPatientBtn').addEventListener('click', openNewPatient);
     E.q('#dailyBriefBtn').addEventListener('click', showDailyBrief);
+    E.q('#advanceDayBtn').addEventListener('click', advanceDay);
     E.q('#secureSlotBtn').addEventListener('click', openSecureSuggestion);
     E.q('#sendReportBtn').addEventListener('click', showNightReport);
-    E.q('#sendRemindersBtn').addEventListener('click', sendReminders);
+    E.q('#sendRemindersBtn').addEventListener('click', function () { sendReminders(); });
     E.q('#optimizeBtn').addEventListener('click', optimizeSchedule);
     E.q('#resetBtn').addEventListener('click', resetDemo);
+    E.q('#printBtn').addEventListener('click', function () { window.print(); });
+    E.q('#printBtn2').addEventListener('click', function () { window.print(); });
+    E.q('#apptExportBtn').addEventListener('click', function () {
+      var lines = visibleAppointments().map(function (item) {
+        return slotLabel(item.slot) + ' — ' + patientOf(item).name + ' — ' + item.type + ' — ' + statusText(item.status);
+      });
+      E.showDialog({
+        kicker: 'EXPORT PREVIEW',
+        title: 'معاينة تصدير الجدول',
+        content: E.resultBox('نسخة نصية من الجدول الظاهر',
+          'هذه معاينة داخل الصفحة فقط ولا يتم تنزيل أو إرسال أي ملف.',
+          lines.length ? lines.slice(0, 12) : ['لا توجد صفوف ظاهرة حاليًا.'])
+      });
+    });
+    E.q('#collectAllBtn').addEventListener('click', function () {
+      var count = 0;
+      state.invoices.forEach(function (invoice) {
+        if (invoice.status !== 'paid') {
+          invoice.status = 'paid';
+          count += 1;
+          var patient = state.patients.find(function (item) { return item.id === invoice.patientId; });
+          if (patient) patient.balance = Math.max(0, patient.balance - invoice.amount);
+        }
+      });
+      renderAll();
+      E.toast('تمت محاكاة تحصيل ' + E.arNumber(count) + ' فاتورة.', count ? 'success' : 'warning');
+    });
+    E.q('#restockBtn').addEventListener('click', function () {
+      var short = lowStock();
+      if (!short.length) { E.toast('لا توجد أصناف تحت الحد الآن.', 'warning'); return; }
+      short.forEach(function (item) { item.stock = item.min * 2; });
+      renderAll();
+      E.toast('تمت محاكاة أمر شراء لـ ' + E.arNumber(short.length) + ' صنف.', 'success');
+    });
+
+    renderAll();
   }());
   </script>
 </body>

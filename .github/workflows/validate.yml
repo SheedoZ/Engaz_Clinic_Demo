@@ -54,10 +54,16 @@ jobs:
             'https://lab.engaz.premiumpower-eg.com/',
             'https://automation.engaz.premiumpower-eg.com/'
           ]);
+          // XML namespace identifiers. These are never dereferenced by the browser:
+          // they only name the SVG vocabulary for document.createElementNS.
+          const allowedNamespaces = new Set([
+            'http://www.w3.org/2000/svg'
+          ]);
           const refs = [...html.matchAll(/\b(?:href|src)\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]);
           for (const ref of refs) {
             if (/^https?:\/\//i.test(ref)) {
               if (!allowedUrls.has(ref)) throw new Error(`external URL is not allowlisted: ${ref}`);
+              // namespace identifiers may not be used as href/src targets
             } else if (!/^#|^(?:\.\/)?(?:v2-theme\.css|v2-core\.js)$/.test(ref)) {
               throw new Error(`broken or forbidden relative link: ${ref}`);
             }
@@ -68,7 +74,7 @@ jobs:
             const text = fs.readFileSync(file, 'utf8');
             for (const raw of text.match(externalPattern) || []) {
               const url = raw.replace(/[),.;]+$/, '');
-              if (!allowedUrls.has(url)) throw new Error(`external URL is not allowlisted in ${file}: ${url}`);
+              if (!allowedUrls.has(url) && !allowedNamespaces.has(url)) throw new Error(`external URL is not allowlisted in ${file}: ${url}`);
             }
           }
           NODE
